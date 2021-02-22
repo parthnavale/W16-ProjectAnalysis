@@ -1,0 +1,43 @@
+.navbar{
+    padding: 0;
+}
+.header-main-navbar{
+    background-color: #ffee9b;
+}
+
+
+.header-main-heading p{
+    font-size: 35px;
+    font-weight: bold;
+    color: #e08a3f;
+}
+
+.header-maintext-name p{
+    font-size: 20px;
+}
+
+.linkText{ 
+    color: black ; 
+}
+
+@media only screen and (max-width: 360px){
+   
+    .navbar{
+        padding: 0 !important;
+    }
+
+    .header-main-navbar img{
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .header-main-heading p{
+        font-size: 15px;
+        font-weight: bold;
+        color: #e08a3f;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 620px) {
+    
+  }
