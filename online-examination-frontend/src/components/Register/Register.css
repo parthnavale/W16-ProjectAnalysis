@@ -1,0 +1,15 @@
+.container-fluid h2{
+    color:#F56F08;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 38px;
+}
+
+.container-fluid h6{
+    color:#F56F08;
+    font-weight: bolder;
+    font-size:16px;
+    margin-top:15px;
+    letter-spacing:2px;
+    margin-left: 60px;
+}
