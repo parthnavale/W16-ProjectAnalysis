@@ -1,7 +1,8 @@
 import React from 'react';
 import {Form , Button} from 'react-bootstrap';
-import GoogleButton from 'react-google-button';
 import './Login.css';
+import {Nav} from "react-bootstrap";
+import {LinkContainer} from 'react-router-bootstrap';
 
 class Login extends React.Component{
     render(){
@@ -14,21 +15,23 @@ class Login extends React.Component{
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" />
                         </Form.Group>
-
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
-                        <GoogleButton
-                            onClick={() => { console.log('Google button clicked') }}
-                            />
-                            <h6>CREATE AN ACCOUNT</h6>
                         <hr/>
-                        <Button variant="warning" className="float-left" type="Cancel">
-                            Cancel
-                        </Button>
+                        <div className="link-text">
+                        <LinkContainer to="/register">
+                        <Nav.Link>CREATE AN ACCOUNT? SIGN UP
+                        </Nav.Link>
+                        </LinkContainer>
+                        </div>
+                        <hr/>
                         <Button variant="primary" className="float-right" type="submit">
                             Submit
+                        </Button>
+                        <Button variant="warning" className="float-left" type="Cancel">
+                            Cancel
                         </Button>
                     </Form>
                 </div>
