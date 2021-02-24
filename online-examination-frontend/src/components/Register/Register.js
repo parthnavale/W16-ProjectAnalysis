@@ -10,11 +10,19 @@ class Register extends React.Component{
             <div className="container-fluid">
                 <div class="d-flex justify-content-center">
                     <Form>
-                    <h2 className="display-4">Create an account</h2>
+                    <h2 className="createAccount">Create an account</h2>
                         <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control type="text" placeholder="Enter Name" />
                             </Form.Group>
+                        <Form.Group controlId="formAddress">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control type="textarea" placeholder="Enter address" />
+                        </Form.Group>
+                        <Form.Group controlId="formDOB">
+                            <Form.Label>Date of birth</Form.Label>
+                            <Form.Control type="date" />
+                        </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" />
@@ -27,19 +35,25 @@ class Register extends React.Component{
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control type="password" placeholder="Confirm Password" />
                         </Form.Group>
+
+                        <Form.Group controlId="formImage">
+                            <Form.Label>Image</Form.Label>
+                            <Form.Control type="file" className="myImage" />
+                        </Form.Group>
                         <hr/>
-                        <div className="link-texet">
                         <LinkContainer to="/login">
-                        <Nav.Link>ALREADY HAVE A ACCOUNT? LOG IN</Nav.Link>
+                        <Nav.Link className="link-texet">ALREADY HAVE A ACCOUNT? LOG IN</Nav.Link>
                         </LinkContainer>
-                        </div>
                         <hr/>
-                        <Button variant="warning" className="float-left" type="Cancel">
+
+                       
+
+                        <Button className="float-left" type="Cancel">
                             Cancel
                         </Button>
-                        <Button variant="primary" className="float-right" type="submit">
+                        <Button className="float-right" type="submit">
                             Create
-                        </Button>
+                        </Button> 
                     </Form>
                 </div>
             </div>
