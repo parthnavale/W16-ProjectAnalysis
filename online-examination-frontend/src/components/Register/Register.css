@@ -1,7 +1,6 @@
-.container-fluid h2{
+.display-4{
     color:#F56F08;
     align-items: center;
-    margin-right: 10px;
     margin-bottom: 38px;
 }
 
@@ -11,5 +10,5 @@
     font-size:16px;
     margin-top:15px;
     letter-spacing:2px;
-    margin-left: 70px;
+    margin-left: 30px;
 }

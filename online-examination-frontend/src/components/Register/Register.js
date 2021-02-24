@@ -10,7 +10,7 @@ class Register extends React.Component{
             <div className="container-fluid">
                 <div class="d-flex justify-content-center">
                     <Form>
-                    <h2 class="display-4">Create an account</h2>
+                    <h2 className="display-4">Create an account</h2>
                         <Form.Group controlId="formBasicName">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control type="text" placeholder="Enter Name" />

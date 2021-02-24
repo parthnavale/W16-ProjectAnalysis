@@ -10,7 +10,7 @@ class Login extends React.Component{
             <div className="container-fluid">
                 <div class="d-flex justify-content-center">
                     <Form>
-                    <h2 class="display-4">Login</h2>
+                    <h2 className="display-3">Login</h2>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" />
