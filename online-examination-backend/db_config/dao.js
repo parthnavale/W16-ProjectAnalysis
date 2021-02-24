@@ -37,13 +37,20 @@ function createDatabaseIfNotExists() {
         password: PASSWORD,
         multipleStatements: true
     });
-    con.query(`CREATE DATABASE IF NOT EXISTS \`${DATABASE}\`;`, function (err, result) {
-        if (err) throw err;
-        console.log("Database Created: " + JSON.stringify(result));
-        if (result) {
-            createTablesIfNotExists();
+    con.query(`DROP DATABASE IF EXISTS \`${DATABASE}\`;`, function (error, resObj) {
+        if (error) throw error;
+        console.log("Database dropped: " + JSON.stringify(resObj));
+        if (resObj) {
+            con.query(`CREATE DATABASE IF NOT EXISTS \`${DATABASE}\`;`, function (err, result) {
+                if (err) throw err;
+                console.log("Database Created: " + JSON.stringify(result));
+                if (result) {
+                    createTablesIfNotExists();
+                }
+            });
         }
     });
+
 }
 
 function createTablesIfNotExists() {
