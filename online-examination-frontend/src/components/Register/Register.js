@@ -1,7 +1,8 @@
 import React from 'react';
 import {Form , Button} from 'react-bootstrap';
-import GoogleButton from 'react-google-button';
 import './Register.css';
+import {Nav} from "react-bootstrap";
+import {LinkContainer} from 'react-router-bootstrap';
 
 class Register extends React.Component{
     render(){
@@ -27,7 +28,11 @@ class Register extends React.Component{
                             <Form.Control type="password" placeholder="Confirm Password" />
                         </Form.Group>
                         <hr/>
-                            <h6>ALREADY HAVE A ACCOUNT? LOG IN</h6>
+                        <div className="link-texet">
+                        <LinkContainer to="/login">
+                        <Nav.Link>ALREADY HAVE A ACCOUNT? LOG IN</Nav.Link>
+                        </LinkContainer>
+                        </div>
                         <hr/>
                         <Button variant="warning" className="float-left" type="Cancel">
                             Cancel
