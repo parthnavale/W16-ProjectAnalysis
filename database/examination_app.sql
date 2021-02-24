@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2021 at 12:11 AM
+-- Generation Time: Feb 24, 2021 at 10:51 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,11 +27,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `options`
 --
 
-CREATE TABLE `options` (
-  `optionId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `options` (
+  `optionId` int(3) NOT NULL AUTO_INCREMENT,
   `option` varchar(50) NOT NULL,
   `created` date NOT NULL,
-  `modified` date DEFAULT NULL
+  `modified` date DEFAULT NULL,
+  PRIMARY KEY (`optionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -40,12 +41,15 @@ CREATE TABLE `options` (
 -- Table structure for table `questionoptions`
 --
 
-CREATE TABLE `questionoptions` (
-  `quesOptionId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `questionoptions` (
+  `quesOptionId` int(3) NOT NULL AUTO_INCREMENT,
   `quesId` int(3) NOT NULL,
   `optionId` int(3) NOT NULL,
   `created` date NOT NULL,
-  `modified` date DEFAULT NULL
+  `modified` date DEFAULT NULL,
+  PRIMARY KEY (`quesOptionId`),
+  KEY `quesId` (`quesId`),
+  KEY `quesId_2` (`quesId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -54,11 +58,12 @@ CREATE TABLE `questionoptions` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `quesId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `quesId` int(3) NOT NULL AUTO_INCREMENT,
   `question` varchar(100) NOT NULL,
   `created` date NOT NULL,
-  `modified` date DEFAULT NULL
+  `modified` date DEFAULT NULL,
+  PRIMARY KEY (`quesId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,10 +72,11 @@ CREATE TABLE `questions` (
 -- Table structure for table `result`
 --
 
-CREATE TABLE `result` (
-  `resultId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `result` (
+  `resultId` int(3) NOT NULL AUTO_INCREMENT,
   `grade` int(3) NOT NULL,
-  `userId` int(3) NOT NULL
+  `userId` int(3) NOT NULL,
+  PRIMARY KEY (`resultId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -79,12 +85,15 @@ CREATE TABLE `result` (
 -- Table structure for table `rightansweroption`
 --
 
-CREATE TABLE `rightansweroption` (
-  `answerId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `rightansweroption` (
+  `answerId` int(3) NOT NULL AUTO_INCREMENT,
   `quesId` int(3) NOT NULL,
   `optionId` int(3) NOT NULL,
   `created` date NOT NULL,
-  `modified` date DEFAULT NULL
+  `modified` date DEFAULT NULL,
+  PRIMARY KEY (`answerId`),
+  KEY `quesId` (`quesId`),
+  KEY `optionId` (`optionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -93,13 +102,17 @@ CREATE TABLE `rightansweroption` (
 -- Table structure for table `useranswers`
 --
 
-CREATE TABLE `useranswers` (
-  `userAnswerId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `useranswers` (
+  `userAnswerId` int(3) NOT NULL AUTO_INCREMENT,
   `userId` int(3) NOT NULL,
   `selectedOptionId` int(3) NOT NULL,
   `quesId` int(3) NOT NULL,
   `created` date NOT NULL,
-  `modified` date DEFAULT NULL
+  `modified` date DEFAULT NULL,
+  PRIMARY KEY (`userAnswerId`),
+  KEY `userId` (`userId`),
+  KEY `answer` (`selectedOptionId`),
+  KEY `quesId` (`quesId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -108,8 +121,8 @@ CREATE TABLE `useranswers` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userId` int(3) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `userId` int(3) NOT NULL AUTO_INCREMENT,
   `fullName` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `address` varchar(100) DEFAULT NULL,
@@ -117,8 +130,10 @@ CREATE TABLE `users` (
   `email` varchar(20) NOT NULL,
   `image` varchar(50) NOT NULL,
   `userCreated` date NOT NULL,
-  `userModified` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `userModified` date DEFAULT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -126,107 +141,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`, `image`, `userCreated`, `userModified`) VALUES
 (1, 'admin', 'admin', 'abcd', '1997-12-23', 'admin@gmail.com', '', '2021-02-22', NULL),
-(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `options`
---
-ALTER TABLE `options`
-  ADD PRIMARY KEY (`optionId`);
-
---
--- Indexes for table `questionoptions`
---
-ALTER TABLE `questionoptions`
-  ADD PRIMARY KEY (`quesOptionId`),
-  ADD KEY `quesId` (`quesId`),
-  ADD KEY `quesId_2` (`quesId`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`quesId`);
-
---
--- Indexes for table `result`
---
-ALTER TABLE `result`
-  ADD PRIMARY KEY (`resultId`);
-
---
--- Indexes for table `rightansweroption`
---
-ALTER TABLE `rightansweroption`
-  ADD PRIMARY KEY (`answerId`),
-  ADD KEY `quesId` (`quesId`),
-  ADD KEY `optionId` (`optionId`);
-
---
--- Indexes for table `useranswers`
---
-ALTER TABLE `useranswers`
-  ADD PRIMARY KEY (`userAnswerId`),
-  ADD KEY `userId` (`userId`),
-  ADD KEY `answer` (`selectedOptionId`),
-  ADD KEY `quesId` (`quesId`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userId`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `options`
---
-ALTER TABLE `options`
-  MODIFY `optionId` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `questionoptions`
---
-ALTER TABLE `questionoptions`
-  MODIFY `quesOptionId` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `quesId` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `result`
---
-ALTER TABLE `result`
-  MODIFY `resultId` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `rightansweroption`
---
-ALTER TABLE `rightansweroption`
-  MODIFY `answerId` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `useranswers`
---
-ALTER TABLE `useranswers`
-  MODIFY `userAnswerId` int(3) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL),
+(3, 'Vatsal Chauhan', 'vatsal', '3541 AV. Van Horne', '1995-01-12', 'chauhanvatsal12@gmai', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAU', '2021-02-24', NULL),
+(4, 'Test User', 'test', 'AV Van Horne', '1995-01-12', 'test@gmail.com', 'null', '2021-02-24', NULL);
 
 --
 -- Constraints for dumped tables
