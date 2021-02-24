@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 10:51 PM
+-- Generation Time: Feb 24, 2021 at 11:48 PM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -99,6 +99,29 @@ CREATE TABLE IF NOT EXISTS `rightansweroption` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `subjectId` int(3) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `test fees` int(10) NOT NULL,
+  PRIMARY KEY (`subjectId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`subjectId`, `name`, `test fees`) VALUES
+(1, 'English', 100),
+(2, 'Mathematics', 150),
+(3, 'General Knowledge', 120),
+(4, 'Science', 140);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `useranswers`
 --
 
@@ -128,12 +151,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `email` varchar(20) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `image` text NOT NULL,
   `userCreated` date NOT NULL,
   `userModified` date DEFAULT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -141,9 +164,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`, `image`, `userCreated`, `userModified`) VALUES
 (1, 'admin', 'admin', 'abcd', '1997-12-23', 'admin@gmail.com', '', '2021-02-22', NULL),
-(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL),
-(3, 'Vatsal Chauhan', 'vatsal', '3541 AV. Van Horne', '1995-01-12', 'chauhanvatsal12@gmai', 'data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAU', '2021-02-24', NULL),
-(4, 'Test User', 'test', 'AV Van Horne', '1995-01-12', 'test@gmail.com', 'null', '2021-02-24', NULL);
+(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL);
 
 --
 -- Constraints for dumped tables
