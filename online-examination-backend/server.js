@@ -1,28 +1,57 @@
 'use strict'
 
-const express = require('express')
-const app = express()
-const cors = require('cors')
-
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const authRoute = require("./routes/auth");
+const DB = require('./db_config/dao');
 // SET CORS to allows cross-origin resource sharing access
-app.use(cors())
+app.use(cors());
 
 // support parsing of application/json type post data
-app.use(express.json())
+app.use(express.json());
 
 // support parsing of application/x-www-form-urlencoded post data
 app.use(express.urlencoded({
     extended: true
-}))
+}));
 
 // HOME PAGE http://localhost:8000
 app.get('/',
     function (req, res) {
-        return res.send('<h4>Online Examination API</h4>')
+        const welcomeString = JSON.stringify({
+            msg: "Welcome to the Online Examination API",
+            status: 200
+        }, null, 4)
+        // set content type
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        })
+        // send out a string
+        res.end(welcomeString)
     }
-)
+);
 
-const portNo = process.env.PORT || 8000
+app.get('/users',
+    function (request, response) {
+        DB.connect()
+        DB.query('SELECT * from users', function (userList) {
+            const userListJSONString = JSON.stringify(userList, null, 4)
+            // set content type
+            response.writeHead(200, {
+                'Content-Type': 'application/json'
+            })
+            DB.disconnect();
+            // send out a string
+            response.end(userListJSONString)
+        })
+    }
+);
+
+// Auth Route(Login, Signup, etc.)
+app.use('/api/auth', authRoute);
+
+const portNo = process.env.PORT || 8000;
 app.listen(portNo, function () {
     console.log(`Server listening to port ${portNo}, go to http://localhost:${portNo}`)
-})
+});

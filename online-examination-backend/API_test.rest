@@ -1,0 +1,18 @@
+GET http://localhost:8000/ HTTP/1.1
+
+###
+GET http://localhost:8000/users HTTP/1.1
+
+###
+POST http://localhost:8000/api/auth/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+email=user@gmail.com&password=user
+
+###
+POST http://localhost:8000/api/auth/signup HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+fullName=Test User&password=test&address=AV Van Horne&dateOfBirth=1995-01-12&email=test@gmail.com&image=null
+
+###
