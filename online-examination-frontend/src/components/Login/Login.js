@@ -1,6 +1,5 @@
 import React from 'react';
 import {Form , Button} from 'react-bootstrap';
-import GoogleButton from 'react-google-button';
 import './Login.css';
 
 class Login extends React.Component{
@@ -19,16 +18,14 @@ class Login extends React.Component{
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
-                        <GoogleButton
-                            onClick={() => { console.log('Google button clicked') }}
-                            />
-                            <h6>CREATE AN ACCOUNT</h6>
                         <hr/>
-                        <Button variant="warning" className="float-left" type="Cancel">
-                            Cancel
-                        </Button>
+                        <h6 className="link-text">CREATE AN ACCOUNT</h6>
+                        <hr/>
                         <Button variant="primary" className="float-right" type="submit">
                             Submit
+                        </Button>
+                        <Button variant="warning" className="float-left" type="Cancel">
+                            Cancel
                         </Button>
                     </Form>
                 </div>
