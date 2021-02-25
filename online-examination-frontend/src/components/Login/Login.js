@@ -88,7 +88,7 @@ class Login extends React.Component{
                         </Nav.Link>
                         </LinkContainer>
                         <hr/>
-                        <Button variant="primary" className="float-right" type="submit" onClick={() => {this.onSubmit(); }} 
+                        <Button variant="primary" className="float-right" type="button" onClick={() => {this.onSubmit(); }} 
                             disabled={!(email.length>0 && password.length>0)}>
                             Submit
                         </Button>
