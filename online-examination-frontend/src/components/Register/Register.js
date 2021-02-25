@@ -27,6 +27,34 @@ class Register extends React.Component {
     }));
   }
 
+  onSubmit() {
+    fetch("http://localhost:8000/api/auth/signup", {
+      method: "post",
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(
+        (result) => {
+          if (result) {
+            alert("Successfully signed up!!.");
+            this.clearFormValues();
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+  clearFormValues() {
+    this.setState({
+      ...initialState,
+    });
+  }
   render() {
     const {
       name,
@@ -124,9 +152,7 @@ class Register extends React.Component {
               className="float-left"
               type="reset"
               onClick={() => {
-                this.setState({
-                  ...initialState,
-                });
+                this.clearFormValues();
               }}
             >
               Reset
@@ -135,30 +161,7 @@ class Register extends React.Component {
               className="float-right"
               type="button"
               onClick={() => {
-                debugger;
-                fetch("http://localhost:8000/api/auth/signup", {
-                  method: "post",
-                  body: JSON.stringify(this.state),
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                })
-                  .then(function (response) {
-                    return response.json();
-                  })
-                  .then(
-                    (result) => {
-                      if (result) {
-                        alert("Successfully signed up!!.");
-                        this.setState({
-                          ...initialState,
-                        });
-                      }
-                    },
-                    (error) => {
-                      console.error(error);
-                    }
-                  );
+                this.onSubmit();
               }}
             >
               Create
