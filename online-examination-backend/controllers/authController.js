@@ -22,7 +22,7 @@ exports.login = (request, response) => {
 
 exports.signup = (request, response) => {
     const signUpData = {
-        name: request.body.fullName,
+        name: request.body.name,
         email: request.body.email,
         password: request.body.password,
         dateOfBirth: request.body.dateOfBirth,

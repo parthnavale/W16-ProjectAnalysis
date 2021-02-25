@@ -5,6 +5,8 @@ const app = express();
 const cors = require('cors');
 const authRoute = require("./routes/auth");
 const DB = require('./db_config/dao');
+
+
 // SET CORS to allows cross-origin resource sharing access
 app.use(cors());
 
@@ -15,6 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+
+// Auth Route(Login, Signup, etc.)
+app.use('/api/auth', authRoute);
 
 // HOME PAGE http://localhost:8000
 app.get('/',
@@ -47,9 +52,6 @@ app.get('/users',
         })
     }
 );
-
-// Auth Route(Login, Signup, etc.)
-app.use('/api/auth', authRoute);
 
 const portNo = process.env.PORT || 8000;
 app.listen(portNo, function () {
