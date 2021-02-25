@@ -55,6 +55,20 @@ class Register extends React.Component {
       ...initialState,
     });
   }
+  checkAllFieldsHasData(){
+    const {
+        name,
+        address,
+        email,
+        password,
+        confirmPassword,
+        dateOfBirth,
+      } = this.state;
+      if(name.length>0 && address.length>0 && email.length>0 && password.length>0 && confirmPassword.length>0 && dateOfBirth.length>0){
+          return false;
+      }
+      return true;
+  }
   render() {
     const {
       name,
@@ -163,6 +177,7 @@ class Register extends React.Component {
               onClick={() => {
                 this.onSubmit();
               }}
+              disabled={this.checkAllFieldsHasData()}
             >
               Create
             </Button>
