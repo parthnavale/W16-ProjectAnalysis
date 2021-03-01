@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2021 at 11:48 PM
+-- Generation Time: Mar 01, 2021 at 10:03 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,6 +20,48 @@ SET time_zone = "+00:00";
 --
 -- Database: `examination_app`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `institutions`
+--
+
+CREATE TABLE IF NOT EXISTS `institutions` (
+  `institudeId` int(3) NOT NULL AUTO_INCREMENT,
+  `institutionName` varchar(100) NOT NULL,
+  `institutionLocation` varchar(100) NOT NULL,
+  `dateCreated` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`institudeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `institutions`
+--
+
+INSERT INTO `institutions` (`institudeId`, `institutionName`, `institutionLocation`, `dateCreated`) VALUES
+(1, 'Auburn University at Montgomery', 'Alabama, USA', '2021-03-01 05:00:00'),
+(4, 'Birmingham Southern College', 'Alabama, USA', '2021-03-01 05:00:00'),
+(5, 'Jacksonville State University', 'Alabama, USA', '2021-03-01 20:49:57'),
+(6, 'Oakwood University', 'Alabama, USA', '2021-03-01 20:49:57'),
+(7, 'Instituto Tecnológico de Buenos Aires', 'Argentina', '2021-03-01 20:50:57'),
+(8, 'Universidad Católica de Salta *', 'Argentina', '2021-03-01 20:50:57'),
+(9, 'Brock University', 'Canada', '2021-03-01 20:51:55'),
+(10, 'Burman University', 'Canada', '2021-03-01 20:51:55'),
+(11, 'Canadian Mennonite University', 'Canada', '2021-03-01 20:52:33'),
+(12, 'Cambrian College', 'Canada', '2021-03-01 20:52:33'),
+(13, 'Centennial College', 'Canada', '2021-03-01 20:53:20'),
+(14, 'City University of Seattle, Canada', 'Canada', '2021-03-01 20:53:20'),
+(15, 'University of Alberta', 'Canada', '2021-03-01 20:54:23'),
+(16, 'University of British Columbia, Okanagan campus - Postgraduate', 'Canada', '2021-03-01 20:54:23'),
+(17, 'University of Calgary', 'Canada', '2021-03-01 20:54:56'),
+(18, 'University of Guelph', 'Canada', '2021-03-01 20:54:56'),
+(19, 'University of Regina - Graduate', 'Canada', '2021-03-01 20:55:29'),
+(20, 'University of Saskatchewan - Graduate', 'Canada', '2021-03-01 20:55:29'),
+(21, 'Vancouver Island University', 'Canada', '2021-03-01 20:55:58'),
+(22, 'University of Windsor', 'Canada', '2021-03-01 20:55:58'),
+(23, 'Yorkville University', 'Canada', '2021-03-01 20:56:40'),
+(24, 'York University Graduate Programs', 'Canada', '2021-03-01 20:56:40');
 
 -- --------------------------------------------------------
 
@@ -60,10 +102,13 @@ CREATE TABLE IF NOT EXISTS `questionoptions` (
 
 CREATE TABLE IF NOT EXISTS `questions` (
   `quesId` int(3) NOT NULL AUTO_INCREMENT,
+  `subjectId` int(3) NOT NULL,
   `question` varchar(100) NOT NULL,
   `created` date NOT NULL,
   `modified` date DEFAULT NULL,
-  PRIMARY KEY (`quesId`)
+  `isPractice` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`quesId`),
+  KEY `subjectId` (`subjectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -154,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `image` text NOT NULL,
   `userCreated` date NOT NULL,
   `userModified` date DEFAULT NULL,
+  `isPurchased` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
@@ -162,9 +208,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`, `image`, `userCreated`, `userModified`) VALUES
-(1, 'admin', 'admin', 'abcd', '1997-12-23', 'admin@gmail.com', '', '2021-02-22', NULL),
-(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL);
+INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`, `image`, `userCreated`, `userModified`, `isPurchased`) VALUES
+(1, 'admin', 'admin', 'abcd', '1997-12-23', 'admin@gmail.com', '', '2021-02-22', NULL, 0),
+(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL, 0);
 
 --
 -- Constraints for dumped tables
@@ -175,6 +221,12 @@ INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`
 --
 ALTER TABLE `questionoptions`
   ADD CONSTRAINT `questionId` FOREIGN KEY (`quesId`) REFERENCES `questions` (`quesId`);
+
+--
+-- Constraints for table `questions`
+--
+ALTER TABLE `questions`
+  ADD CONSTRAINT `subjectId` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`);
 
 --
 -- Constraints for table `rightansweroption`
