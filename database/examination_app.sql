@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2021 at 12:59 AM
+-- Generation Time: Mar 02, 2021 at 08:53 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -80,43 +80,16 @@ CREATE TABLE IF NOT EXISTS `result` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subjects`
---
-
-CREATE TABLE IF NOT EXISTS `subjects` (
-  `subjectId` int(3) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `test fees` int(10) NOT NULL,
-  PRIMARY KEY (`subjectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `subjects`
---
-
-INSERT INTO `subjects` (`subjectId`, `name`, `test fees`) VALUES
-(1, 'English', 100),
-(2, 'Mathematics', 150),
-(3, 'General Knowledge', 120),
-(4, 'Science', 140);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `useranswers`
 --
 
 CREATE TABLE IF NOT EXISTS `useranswers` (
-  `userAnswerId` int(3) NOT NULL AUTO_INCREMENT,
+  `answerId` int(3) NOT NULL AUTO_INCREMENT,
   `userId` int(3) NOT NULL,
-  `selectedOptionId` int(3) NOT NULL,
-  `quesId` int(3) NOT NULL,
+  `userAnswer` varchar(100) NOT NULL,
   `created` date NOT NULL,
-  `modified` date DEFAULT NULL,
-  PRIMARY KEY (`userAnswerId`),
-  KEY `userId` (`userId`),
-  KEY `answer` (`selectedOptionId`),
-  KEY `quesId` (`quesId`)
+  PRIMARY KEY (`answerId`),
+  KEY `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -156,9 +129,7 @@ INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`
 -- Constraints for table `useranswers`
 --
 ALTER TABLE `useranswers`
-  ADD CONSTRAINT `answer` FOREIGN KEY (`selectedOptionId`) REFERENCES `options` (`optionId`),
-  ADD CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`),
-  ADD CONSTRAINT `useranswers_ibfk_1` FOREIGN KEY (`quesId`) REFERENCES `questions` (`quesId`);
+  ADD CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
