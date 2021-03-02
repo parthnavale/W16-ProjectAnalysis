@@ -56,3 +56,22 @@ exports.setupDatabaseAndTables = (req, res) => {
     }, 1000)
 
 };
+
+exports.purchase = (request, response) => {
+    const purchaseData = {
+        userId: request.body.userId
+    };
+    DB.connect();
+    let query = "UPDATE users SET isPurchased=1 WHERE userId='" + purchaseData.userId + "'";
+    console.log(query);
+    DB.query(query, function (userList) {
+        const userListJSONString = JSON.stringify(userList, null, 4)
+        // set content type
+        response.writeHead(200, {
+            'Content-Type': 'application/json'
+        })
+        DB.disconnect();
+        // send out a string
+        response.end(userListJSONString)
+    });
+};
