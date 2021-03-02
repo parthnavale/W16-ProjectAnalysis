@@ -42,7 +42,7 @@ class Login extends React.Component{
                     ...prevState,
                     redirect: true
                   }),()=>{
-                      alert("Successfully login!!.");  
+                    this.props.history.push("/");
                   });   
               }
               else{
