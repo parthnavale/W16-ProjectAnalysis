@@ -4,6 +4,9 @@ GET http://localhost:8000/ HTTP/1.1
 GET http://localhost:8000/users HTTP/1.1
 
 ###
+GET http://localhost:8000/institutions HTTP/1.1
+
+###
 GET http://localhost:8000/api/auth/setupDatabaseAndTables HTTP/1.1
 
 ###
