@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2021 at 10:03 PM
+-- Generation Time: Mar 02, 2021 at 12:59 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -66,54 +66,6 @@ INSERT INTO `institutions` (`institudeId`, `institutionName`, `institutionLocati
 -- --------------------------------------------------------
 
 --
--- Table structure for table `options`
---
-
-CREATE TABLE IF NOT EXISTS `options` (
-  `optionId` int(3) NOT NULL AUTO_INCREMENT,
-  `option` varchar(50) NOT NULL,
-  `created` date NOT NULL,
-  `modified` date DEFAULT NULL,
-  PRIMARY KEY (`optionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `questionoptions`
---
-
-CREATE TABLE IF NOT EXISTS `questionoptions` (
-  `quesOptionId` int(3) NOT NULL AUTO_INCREMENT,
-  `quesId` int(3) NOT NULL,
-  `optionId` int(3) NOT NULL,
-  `created` date NOT NULL,
-  `modified` date DEFAULT NULL,
-  PRIMARY KEY (`quesOptionId`),
-  KEY `quesId` (`quesId`),
-  KEY `quesId_2` (`quesId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `questions`
---
-
-CREATE TABLE IF NOT EXISTS `questions` (
-  `quesId` int(3) NOT NULL AUTO_INCREMENT,
-  `subjectId` int(3) NOT NULL,
-  `question` varchar(100) NOT NULL,
-  `created` date NOT NULL,
-  `modified` date DEFAULT NULL,
-  `isPractice` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`quesId`),
-  KEY `subjectId` (`subjectId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `result`
 --
 
@@ -121,24 +73,8 @@ CREATE TABLE IF NOT EXISTS `result` (
   `resultId` int(3) NOT NULL AUTO_INCREMENT,
   `grade` int(3) NOT NULL,
   `userId` int(3) NOT NULL,
+  `isPractice` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`resultId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rightansweroption`
---
-
-CREATE TABLE IF NOT EXISTS `rightansweroption` (
-  `answerId` int(3) NOT NULL AUTO_INCREMENT,
-  `quesId` int(3) NOT NULL,
-  `optionId` int(3) NOT NULL,
-  `created` date NOT NULL,
-  `modified` date DEFAULT NULL,
-  PRIMARY KEY (`answerId`),
-  KEY `quesId` (`quesId`),
-  KEY `optionId` (`optionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -215,25 +151,6 @@ INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `questionoptions`
---
-ALTER TABLE `questionoptions`
-  ADD CONSTRAINT `questionId` FOREIGN KEY (`quesId`) REFERENCES `questions` (`quesId`);
-
---
--- Constraints for table `questions`
---
-ALTER TABLE `questions`
-  ADD CONSTRAINT `subjectId` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`);
-
---
--- Constraints for table `rightansweroption`
---
-ALTER TABLE `rightansweroption`
-  ADD CONSTRAINT `optionId` FOREIGN KEY (`optionId`) REFERENCES `options` (`optionId`),
-  ADD CONSTRAINT `quesId` FOREIGN KEY (`quesId`) REFERENCES `questions` (`quesId`);
 
 --
 -- Constraints for table `useranswers`
