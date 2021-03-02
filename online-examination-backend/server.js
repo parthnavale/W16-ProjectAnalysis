@@ -53,6 +53,22 @@ app.get('/users',
     }
 );
 
+app.get('/institutions',
+    function (request, response) {
+        DB.connect()
+        DB.query('SELECT * from institutions', function (userList) {
+            const userListJSONString = JSON.stringify(userList, null, 4)
+            // set content type
+            response.writeHead(200, {
+                'Content-Type': 'application/json'
+            })
+            DB.disconnect();
+            // send out a string
+            response.end(userListJSONString)
+        })
+    }
+);
+
 const portNo = process.env.PORT || 8000;
 app.listen(portNo, function () {
     console.log(`Server listening to port ${portNo}, go to http://localhost:${portNo}`)
