@@ -10,9 +10,9 @@ const footerPage = (props) => {
             <div className="row">
               <div className="col-sm-4 col-md-4">
                 <h6>About Us</h6>
-                <a href="#">For test takers</a><br/>
-                  <a href="#">For admissions</a><br/>
-                  <a href="#">Other</a>
+                <a href="/aboutus">For test takers</a><br/>
+                  <a href="/aboutus">For admissions</a><br/>
+                  <a href="/aboutus">Other</a>
                  
 
               </div>
