@@ -10,23 +10,23 @@ const footerPage = (props) => {
             <div className="row">
               <div className="col-sm-4 col-md-4">
                 <h6>About Us</h6>
-                <a href="http://google.com/">For test takers</a><br/>
-                  <a href="https://www.google.com/">For admissions</a><br/>
-                  <a href="https://www.google.com/">Other</a>
+                <a href="#">For test takers</a><br/>
+                  <a href="#">For admissions</a><br/>
+                  <a href="#">Other</a>
                  
 
               </div>
     
               <div className="col-xs-4 col-md-4">
                 <h6>Help and Support</h6>
-                <a href="http://google.com/">Help Center</a><br/>
-                  <a href="https://www.google.com/">How scores work</a><br/>
+                <a href="#">Help Center</a><br/>
+                  <a href="#">How scores work</a><br/>
                   </div>
     
               <div className="col-xs-4 col-md-4">
                 <h6>Privacy and Terms</h6>
-                <a href="http://google.com/">Terms</a><br/>
-                  <a href="https://www.google.com/">Privacy</a><br/>
+                <a href="#">Terms</a><br/>
+                  <a href="#">Privacy</a><br/>
                
               </div>
             </div>

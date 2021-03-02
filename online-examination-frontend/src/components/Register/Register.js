@@ -163,6 +163,7 @@ class Register extends React.Component {
             <hr />
 
             <Button
+              style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}}
               className="float-left"
               type="reset"
               onClick={() => {
@@ -172,6 +173,7 @@ class Register extends React.Component {
               Reset
             </Button>
             <Button
+              style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}}
               className="float-right"
               type="button"
               onClick={() => {

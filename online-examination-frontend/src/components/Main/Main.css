@@ -1,3 +1,18 @@
-.mainComponent {
-    padding-top: 60px;
+.classRight {
+    margin-left: 25em;
+}
+
+.image-icon {
+    margin-top: 40px;
+}
+
+.image-icon h1 {
+    padding-left: 15px;
+    font-size: 40px;
+    font-weight: bolder;
+    word-wrap: break-word;
+}
+
+.button1 {
+    margin-left: 10px;
 }

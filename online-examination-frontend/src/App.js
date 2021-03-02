@@ -1,6 +1,7 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Main from "./components/Main/Main";
+import AboutUs from "./components/AboutUs/AboutUs";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register";
 import Pagenotfound from "./components/Error/Error";
@@ -13,6 +14,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Main} />
+          <Route exact path="/aboutus" component={AboutUs} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route component={Pagenotfound} />
