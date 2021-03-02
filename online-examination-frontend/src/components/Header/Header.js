@@ -22,7 +22,7 @@ const header = (props) => {
         <div className="col-md-2 col-sm-12 col-xs-12 col-lg-8 float-right">
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="float-right">
-            <LinkContainer to="/">
+            <LinkContainer to="/scores">
               <Nav.Link>
                 <h4 className="linkText">Test-Takers</h4>
               </Nav.Link>
