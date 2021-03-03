@@ -4,7 +4,6 @@ import './Login.css';
 import {LinkContainer} from 'react-router-bootstrap';
 import {Redirect} from 'react-router-dom';
 import {AuthContext} from '../../App';
-import context from 'react-bootstrap/esm/AccordionContext';
 
 const initialState = {
     email: "",
