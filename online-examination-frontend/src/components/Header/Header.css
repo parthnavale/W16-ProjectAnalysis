@@ -3,11 +3,13 @@
 }
 
 .header-main-heading p {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bolder;
     color: #F56F08;
-    border: 2px solid black;
-    border-radius: 25px;
+    /*border: 2px solid black;
+    border-radius: 25px;*/
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 4px 4px 4px white;
     padding: 10px;
 }
 
