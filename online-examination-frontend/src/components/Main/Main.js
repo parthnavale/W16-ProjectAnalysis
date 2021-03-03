@@ -10,8 +10,8 @@ const Main = () =>{
           <Col>
             <Image src="image2.jpg" />
           </Col>
-          <Col className="image-icon">    
-            <h1>Certify your English proficiency today</h1>
+          <Col>    
+            <h1><br/>Certify your English proficiency today</h1>
             <br/>
                 <Image src="icon1.png"/>
                 <Navbar.Brand>

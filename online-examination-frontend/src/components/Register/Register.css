@@ -1,8 +1,5 @@
-.createAccount {
+.display-4 {
     color: #F56F08;
-    align-items: center;
-    font-weight: bold;
-    margin: 30px 30px 30px 0px;
 }
 
 .link-texet {
@@ -21,4 +18,8 @@
     margin-top: 15px;
     letter-spacing: 2px;
     margin-left: 30px;
+}
+
+.form1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Scores.css";
-//import { Container, Row,Col,Image,Navbar, Button } from 'react-bootstrap';
 import { Tab, Tabs, Table } from 'react-bootstrap';
 
 
@@ -8,6 +7,10 @@ import { Tab, Tabs, Table } from 'react-bootstrap';
 const Scores = () =>{
     return(
         <div className="mainDiv">
+        <h1 className="display-4" >Score comparison</h1>
+        <p className="paragraph1">Based on the research that links Duolingo English Test scores to TOEFL iBT total scores and IELTS overall band scores, 
+            Duolingo has developed the following comparison table to help you make well-informed admissions decisions.</p><br/>
+        <div className="divTable">
         <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
             <Tab eventKey="home" title="CGPA"> 
             <br/>
@@ -140,6 +143,7 @@ const Scores = () =>{
             </Table>
             </Tab>           
         </Tabs>
+        </div>
         </div>
     );
 }

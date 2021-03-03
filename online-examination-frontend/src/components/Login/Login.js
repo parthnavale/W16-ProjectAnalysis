@@ -68,7 +68,7 @@ class Login extends React.Component{
         return(
             <div className="container-fluid">
                 <div className="d-flex justify-content-center">
-                    <Form>
+                    <Form className="form1">
                     <h2 className="display-3">Login</h2>
                         <Form.Group>
                             <Form.Label>Email address</Form.Label>
