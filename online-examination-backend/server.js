@@ -3,7 +3,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+
 const authRoute = require("./routes/auth");
+const examRoute=require("./routes/exams");
+const institutionsRoute=require("./routes/institutions");
+
 const DB = require('./db_config/dao');
 
 
@@ -20,6 +24,8 @@ app.use(express.urlencoded({
 
 // Auth Route(Login, Signup, etc.)
 app.use('/api/auth', authRoute);
+app.use('/api/exam', examRoute);
+app.use('/api/institutions', institutionsRoute);
 
 // HOME PAGE http://localhost:8000
 app.get('/',
@@ -41,22 +47,6 @@ app.get('/users',
     function (request, response) {
         DB.connect()
         DB.query('SELECT * from users', function (userList) {
-            const userListJSONString = JSON.stringify(userList, null, 4)
-            // set content type
-            response.writeHead(200, {
-                'Content-Type': 'application/json'
-            })
-            DB.disconnect();
-            // send out a string
-            response.end(userListJSONString)
-        })
-    }
-);
-
-app.get('/institutions',
-    function (request, response) {
-        DB.connect()
-        DB.query('SELECT * from institutions', function (userList) {
             const userListJSONString = JSON.stringify(userList, null, 4)
             // set content type
             response.writeHead(200, {

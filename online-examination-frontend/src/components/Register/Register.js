@@ -82,8 +82,8 @@ class Register extends React.Component {
     return (
       <div className="container-fluid">
         <div className="d-flex justify-content-center">
-          <Form>
-            <h2 className="createAccount">Create an account</h2>
+          <Form className="form1">
+            <h2 className="display-4">Create an account</h2><br/>
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control

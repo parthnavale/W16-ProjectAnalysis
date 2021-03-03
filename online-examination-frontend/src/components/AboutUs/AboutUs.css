@@ -15,7 +15,14 @@ h2 {
 }
 
 .img1 {
-    height: 100px;
-    width: 200px;
-    padding-left: 55px;
+    height: 90px;
+    width: 220px;
+    padding-left: 65px;
+}
+
+.paraHeading {
+    padding-left: 100px;
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: #707070;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./AboutUs.css";
-import { Container, Row,Col,Image,Navbar, Button } from 'react-bootstrap';
+import { Container, Row,Col,Image} from 'react-bootstrap';
 
 
 const AboutUs = () =>{
@@ -34,22 +34,26 @@ const AboutUs = () =>{
           </Col>
           </Row>
 
-          <br/><h2>On demand, anywhere in the world</h2><br/>
+          <br/><br/><h2>On demand, anywhere in the world</h2><br/><br/>
 
           <Row lg={3} >
           <Col className="col1">
-          <Image className="img1" src="icon5.PNG" /><br/>
-          <p>Convenient</p><br/>
-           </Col>
+            <Image className="img1" src="icon5.PNG" /><br/><br/>
+            <p className="paraHeading">Convenient</p>
+            <p>Take the test online anywhere, anytime—no traveling to a test center or appointment needed</p>
+          </Col>
           <Col className="col1">
-          <Image className="img1" src="icon6.PNG" /><br/>
-          col2         
+            <Image className="img1" src="icon6.PNG" /><br/><br/>
+            <p className="paraHeading">Fast</p>
+            <p>Get your results within 48 hours of completing the test, and share it with anyone, immediately</p>      
           </Col>
           <Col className="col1"> 
-          <Image className="img1" src="icon4.PNG" /><br/>
-          col3       
+            <Image className="img1" src="icon4.PNG" /><br/><br/>
+            <p className="paraHeading">Affordable</p>
+            <p>Receive your score for only $49, while most other certification tests cost over $200</p>      
           </Col>
           </Row>
+          <br/><br/>
         </Container>
     );
 }

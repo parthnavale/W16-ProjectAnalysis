@@ -6,7 +6,7 @@ exports.login = (request, response) => {
         password: request.body.password,
     }
     DB.connect();
-    let query = "select * from users where email='" + loginData.email + "' and password='" + loginData.password + "'";
+    let query = "select userId,fullName,address,dob,email,image,userCreated,userModified,isPurchased from users where email='" + loginData.email + "' and password='" + loginData.password + "' LIMIT 1";
     console.log(query);
     DB.query(query, function (userList) {
         const userListJSONString = JSON.stringify(userList, null, 4)
