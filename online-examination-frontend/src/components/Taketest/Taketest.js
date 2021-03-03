@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron,Container,Image,Row,Col, Button } from 'react-bootstrap';
-
+import './Taketest.css';
 import {LinkContainer} from 'react-router-bootstrap';
 
 class Taketest extends React.Component{
@@ -8,7 +8,7 @@ class Taketest extends React.Component{
     render() {
         return (
             <div className="mainDiv">
-                <Jumbotron>
+                <Jumbotron className="design-layout">
                     <Container>
                         <Row>
                     <Image src="icon1.png"/>{' '}
@@ -19,11 +19,11 @@ class Taketest extends React.Component{
                         This is a modified jumbotron that occupies the entire horizontal space of
                         its parent.
                         </p>
-                        <Button variant="warning">Warning</Button>
+                        <Button>Take Test</Button>
                         </Row>
                     </Container>
                 </Jumbotron>
-                <Jumbotron>
+                <Jumbotron className="design-layout">
                     <Container>
                     <Row>
                     <Image src="icon1.png"/>{' '}
@@ -34,11 +34,11 @@ class Taketest extends React.Component{
                         This is a modified jumbotron that occupies the entire horizontal space of
                         its parent.
                         </p>
-                        <Button variant="warning">Warning</Button>
+                        <Button>Take Test</Button>
                         </Row>
                     </Container>
                 </Jumbotron>
-                <Jumbotron>
+                <Jumbotron className="design-layout">
                     <Container>
                          <Row>
                     <Image src="icon1.png" className="mb-2"/>{' '}
@@ -49,7 +49,7 @@ class Taketest extends React.Component{
                         This is a modified jumbotron that occupies the entire horizontal space of
                         its parent.
                         </p>
-                        <Button variant="warning">Warning</Button>
+                        <Button>Take Test</Button>
                         </Row>
                     </Container>
                 </Jumbotron>
