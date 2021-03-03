@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2021 at 08:53 PM
+-- Generation Time: Mar 04, 2021 at 12:02 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -71,11 +71,12 @@ INSERT INTO `institutions` (`institudeId`, `institutionName`, `institutionLocati
 
 CREATE TABLE IF NOT EXISTS `result` (
   `resultId` int(3) NOT NULL AUTO_INCREMENT,
-  `grade` int(3) NOT NULL,
+  `grade` float NOT NULL,
   `userId` int(3) NOT NULL,
   `isPractice` tinyint(1) NOT NULL DEFAULT 1,
+  `createdDate` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`resultId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -111,15 +112,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `isPurchased` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userId`, `fullName`, `password`, `address`, `dob`, `email`, `image`, `userCreated`, `userModified`, `isPurchased`) VALUES
-(1, 'admin', 'admin', 'abcd', '1997-12-23', 'admin@gmail.com', '', '2021-02-22', NULL, 0),
-(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL, 0);
+(1, 'admin', 'admin', 'abcd', '1997-12-23', 'admin@gmail.com', '', '2021-02-22', NULL, 1),
+(2, 'user', 'user', 'dcba', '1997-12-23', 'user@gmail.com', '', '2021-02-22', NULL, 0),
+(5, 'Test User', 'test', 'AV Van Horne', '1995-01-12', 'test@gmail.com', 'null', '2021-03-02', NULL, 0);
 
 --
 -- Constraints for dumped tables
