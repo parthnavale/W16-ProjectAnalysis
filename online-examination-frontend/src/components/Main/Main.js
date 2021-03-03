@@ -3,7 +3,8 @@ import "./Main.css";
 import { Container, Row,Col,Image,Navbar, Button } from 'react-bootstrap';
 
 
-const Main = () =>{
+class Main extends React.Component{
+  render(){
     return(
         <Container>
         <Row lg={2}>
@@ -28,11 +29,11 @@ const Main = () =>{
                 <p>Accepted by over 3000 institutions</p>
                 </Navbar.Brand>
             <br/><br/>
-            <Button className="button1" style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}} size="lg">TAKE A TEST</Button>
+            <Button className="button1"  style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}} size="lg">TAKE A TEST</Button>
           </Col>
           </Row>
         </Container>
-    );
+    )};
 }
 
 export default Main;

@@ -3,6 +3,8 @@ import {Form , Button, Nav} from 'react-bootstrap';
 import './Login.css';
 import {LinkContainer} from 'react-router-bootstrap';
 import {Redirect} from 'react-router-dom';
+import {AuthContext} from '../../App';
+import context from 'react-bootstrap/esm/AccordionContext';
 
 const initialState = {
     email: "",
@@ -42,8 +44,11 @@ class Login extends React.Component{
                     ...prevState,
                     redirect: true
                   }),()=>{
+                    
+                    this.setState({ isLoggedIn: true });
+                    localStorage.setItem("isLoggedIn","true");
                     this.props.history.push("/");
-                  });   
+                  });    
               }
               else{
                   alert("Incorrect email or password!.");
@@ -56,7 +61,7 @@ class Login extends React.Component{
       }
 
     render(){
-        const {
+      const {
             email,
             password,
             redirect            
@@ -88,11 +93,14 @@ class Login extends React.Component{
                         </Nav.Link>
                         </LinkContainer>
                         <hr/>
-                        <Button style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}} className="float-right" type="button" onClick={() => {this.onSubmit(); }} 
+                        <AuthContext.Consumer>
+                        {context => (
+                        <Button style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}} className="float-right" type="button" onClick={() => {this.onSubmit(); context.setAuth({ isLoggedIn : "true" });}} 
                             disabled={!(email.length>0 && password.length>0)}>
                             Submit
                         </Button>
-                        
+                        )}
+                        </AuthContext.Consumer>
                     </Form>
                 </div>
             </div>
