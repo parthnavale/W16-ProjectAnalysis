@@ -4,6 +4,7 @@ import Main from "./components/Main/Main";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register";
+import Institution from "./components/Institution/Institution.js";
 import Pagenotfound from "./components/Error/Error";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/aboutus" component={AboutUs} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/institution" component={Institution} />
           <Route component={Pagenotfound} />
         </Switch>
         <Footer />
