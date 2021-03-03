@@ -55,7 +55,7 @@ class Header extends React.Component {
                 <h4 className="linkText">Test-Takers</h4>
               </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/login">
+              <LinkContainer to="/taketest">
             <Nav.Link>
               <h4 className="linkText">Institutions</h4>
             </Nav.Link>
