@@ -1,109 +1,127 @@
-import React from 'react';
-import {Form , Button, Nav} from 'react-bootstrap';
-import './Login.css';
-import {LinkContainer} from 'react-router-bootstrap';
-import {Redirect} from 'react-router-dom';
-import {AuthContext} from '../../App';
+import React from "react";
+import { Form, Button, Nav } from "react-bootstrap";
+import "./Login.css";
+import { LinkContainer } from "react-router-bootstrap";
+import { Redirect } from "react-router-dom";
+import { AuthContext } from "../../App";
 
 const initialState = {
-    email: "",
-    password: "",
-    redirect: false
-  };
+  email: "",
+  password: "",
+};
 
-class Login extends React.Component{
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { ...initialState };
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = { ...initialState };
-      }
-    
-      handleChange(e) {
-        const { id, value } = e.target;
-        this.setState((prevState) => ({
-          ...prevState,
-          [id]: value
-        }));
-      }
-      onSubmit() {
-        fetch("http://localhost:8000/api/auth/login", {
-          method: "post",
-          body: JSON.stringify(this.state),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then(function (response) {
-            return response.json();
-          })
-          .then(
-            (result) => {
-              if (result && result.length>0) {
-                this.setState((prevState) => ({
-                    ...prevState,
-                    redirect: true
-                  }),()=>{
-                    this.setState({ isLoggedIn: true });
-                    localStorage.setItem("isLoggedIn","true");
-                    this.props.history.push("/");
-                  });    
+  handleChange(e) {
+    const { id, value } = e.target;
+    this.setState((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  }
+  onSubmit(context) {
+    fetch("http://localhost:8000/api/auth/login", {
+      method: "post",
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(
+        (result) => {
+          if (result && result.length > 0) {
+            this.setState(
+              (prevState) => ({
+                ...prevState,
+              }),
+              () => {
+                context.setAuth({ isLoggedIn: true, user: result[0] });
+                this.props.history.push("/");
               }
-              else{
-                  alert("Incorrect email or password!.");
-              }
-            },
-            (error) => {
-              console.error(error);
-            }
-          );
-      }
-
-    render(){
-      const {
-            email,
-            password,
-            redirect            
-          } = this.state;
-          if (redirect) {
-            return <Redirect to='/'/>;
+            );
+          } else {
+            alert("Incorrect email or password!.");
           }
-             
-        return(
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+
+  render() {
+    const { email, password } = this.state;
+    return (
+      <AuthContext.Consumer>
+        {(context) => {
+          if (context.isLoggedIn) {
+            return <Redirect to="/" />;
+          }
+          return (
             <div className="container-fluid">
-                <div className="d-flex justify-content-center">
-                    <Form className="formLogin">
-                    <h2 className="display-3">Login</h2>
-                        <Form.Group>
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email"   id="email"
-                             value={email}
-                             onChange={(e) => this.handleChange(e)} required />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" id="password"
-                             value={password}
-                             onChange={(e) => this.handleChange(e)} required />
-                        </Form.Group>
-                        <hr/>
-                        <LinkContainer to="/register">
-                        <Nav.Link className="link-text">CREATE AN ACCOUNT? SIGN UP
-                        </Nav.Link>
-                        </LinkContainer>
-                        <hr/>
-                        <AuthContext.Consumer>
-                        {context => (
-                        <Button style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}} className="float-right" type="button" onClick={() => {this.onSubmit(); context.setAuth({ isLoggedIn : "true" });}} 
-                            disabled={!(email.length>0 && password.length>0)}>
-                            Submit
-                        </Button>
-                        )}
-                        </AuthContext.Consumer>
-                    </Form>
-                </div>
+              <div className="d-flex justify-content-center">
+                <Form className="formLogin">
+                  <h2 className="display-3">Login</h2>
+                  <Form.Group>
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => this.handleChange(e)}
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => this.handleChange(e)}
+                      required
+                    />
+                  </Form.Group>
+                  <hr />
+                  <LinkContainer to="/register">
+                    <Nav.Link className="link-text">
+                      CREATE AN ACCOUNT? SIGN UP
+                    </Nav.Link>
+                  </LinkContainer>
+                  <hr />
+
+                  <Button
+                    style={{
+                      color: "white",
+                      background: "#F56F08",
+                      border: "0px #F56F08",
+                    }}
+                    className="float-right"
+                    type="button"
+                    onClick={() => {
+                      this.onSubmit(context);
+                    }}
+                    disabled={!(email.length > 0 && password.length > 0)}
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              </div>
             </div>
-        );
-    }
+          );
+        }}
+      </AuthContext.Consumer>
+    );
+  }
 }
 
 export default Login;

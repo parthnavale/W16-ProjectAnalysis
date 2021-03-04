@@ -37,15 +37,10 @@ class PracticeExam extends React.Component {
               });
             }
           }
-          this.setState(
-            {
-              isLoaded: true,
-              data: newData,
-            },
-            () => {
-              console.log(this.state.data);
-            }
-          );
+          this.setState({
+            isLoaded: true,
+            data: newData,
+          });
         },
         (error) => {
           this.setState({
@@ -71,12 +66,25 @@ class PracticeExam extends React.Component {
     return data[questionNumber];
   }
   generateOptions(questionId, currentQuestionsOptions) {
+    let { userAnswers } = this.state;
     return currentQuestionsOptions.map((item, index) => {
+      let isChecked = false;
+      const answerIndex = userAnswers.findIndex(
+        (x) => x.questionId === questionId
+      );
+      if (
+        userAnswers &&
+        answerIndex !== -1 &&
+        userAnswers[answerIndex].selectedAnswer === item
+      ) {
+        isChecked = true;
+      }
       return (
         <Row key={index}>
           <Form.Check
             type="radio"
             name="radio"
+            checked={isChecked}
             value={item}
             onChange={(e) => {
               this.optionSelected(questionId, e.target.value);
@@ -86,6 +94,31 @@ class PracticeExam extends React.Component {
         </Row>
       );
     });
+  }
+  optionSelected(questionId, selectedAnswer) {
+    let { userAnswers } = this.state;
+    if (userAnswers && userAnswers.length > 0) {
+      const answerIndex = userAnswers.findIndex(
+        (x) => x.questionId === questionId
+      );
+      if (answerIndex !== -1) {
+        userAnswers[answerIndex].selectedAnswer = selectedAnswer;
+      } else {
+        userAnswers.push({
+          questionId: questionId,
+          selectedAnswer: selectedAnswer,
+        });
+      }
+    } else {
+      userAnswers.push({
+        questionId: questionId,
+        selectedAnswer: selectedAnswer,
+      });
+    }
+    this.setState((prevState) => ({
+      ...prevState,
+      userAnswers,
+    }));
   }
   render() {
     const { data, currentQuestionCount } = this.state;
@@ -97,7 +130,7 @@ class PracticeExam extends React.Component {
         </div>
       );
     }
-    debugger;
+
     return (
       <div className="app">
         {data.length > 0 && (
