@@ -1,94 +1,167 @@
-import React, { useState } from 'react';
+import React from "react";
 import "./PracticeExam.css";
-import { Form,Row } from 'react-bootstrap';
+import { Form, Row } from "react-bootstrap";
 
-export default function Appp() {
-	const questions = [
-		{
-			questionText: 'What is the capital of France?',
-			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Who is CEO of Tesla?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'The iPhone was created by which company?',
-			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'How many Harry Potter books are there?',
-			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
-			],
-		},
-	];
+class PracticeExam extends React.Component {
+  constructor(props) {
+    super(props);
 
-	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [showScore, setShowScore] = useState(false);
-	const [score, setScore] = useState(0);
+    this.state = {
+      data: [],
+      error: null,
+      count: 0,
+      currentQuestionCount: 1,
+      userAnswers: [],
+    };
+  }
 
-/*	const handleAnswerOptionClick = (isCorrect) => {
-		if (isCorrect) {
-			setScore(score + 1);
-		}
+  fetchPracticeTestQuestions() {
+    fetch("http://localhost:8000/api/exam/listPracticeTestQuestion")
+      .then((response) => response.json())
+      .then(
+        (result) => {
+          let newData = [];
+          if (result) {
+            if ("results" in result) {
+              result.results.forEach((item, index) => {
+                let optionsArray = item.incorrect_answers || [];
+                optionsArray.push(item.correct_answer);
+                optionsArray = optionsArray.sort((a, b) => a.localeCompare(b));
+                let obj = {
+                  id: index + 1,
+                  question: item.question,
+                  correct_answer: item.correct_answer,
+                  allOptions: optionsArray,
+                };
+                newData.push({ ...obj });
+              });
+            }
+          }
+          this.setState(
+            {
+              isLoaded: true,
+              data: newData,
+            },
+            () => {
+              console.log(this.state.data);
+            }
+          );
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
+  }
+  componentDidMount() {
+    this.fetchPracticeTestQuestions();
+  }
 
-		const nextQuestion = currentQuestion + 1;
-		if (nextQuestion < questions.length) {
-			setCurrentQuestion(nextQuestion);
-		} else {
-			setShowScore(true);
-		}
-	}; */
-	return (
-		<div className='app'>
-			{showScore ? (
-				<div className='score-section'>
-					You scored {score} out of {questions.length}
-				</div>
-			) : (
-				<>
-					<div className='question-section'>
-						<div className='question-count'>
-							<Row><span>Question {currentQuestion + 1}</span><p className="div1">/{questions.length}</p></Row>
-						
-						    <p className='question-text'>{questions[currentQuestion].questionText}</p>
-                        </div>
-					</div>
-                    <br/>
-					<div className='answer-section'>
-						{questions[currentQuestion].answerOptions.map((answerOption) => (
-                              <div className="radioBtn"><Row><Form.Check type="radio" name="radio"  />{answerOption.answerText}</Row></div>
-						))}
-					</div>
-                    <div className="d-flex align-items-center pt-3">
-                        <div id="prev"> 
-                            <button className="btn btn-primary">Previous</button> 
-                        </div>
-                        <div className="ml-auto mr-sm-5"> 
-                            <button className="btn btn-success">Next</button> 
-                        </div>
-                    </div>
-				</>
-			)}
-		</div>
-	);
+  incrementQuestion() {
+    this.state((prevState) => ({
+      ...prevState,
+      count: this.count + 1,
+    }));
+  }
+
+  getCurrentQuestion(questionNumber) {
+    const { data } = this.state;
+    return data[questionNumber];
+  }
+  generateOptions(questionId, currentQuestionsOptions) {
+    return currentQuestionsOptions.map((item, index) => {
+      return (
+        <Row key={index}>
+          <Form.Check
+            type="radio"
+            name="radio"
+            value={item}
+            onChange={(e) => {
+              this.optionSelected(questionId, e.target.value);
+            }}
+          />
+          {item}
+        </Row>
+      );
+    });
+  }
+  render() {
+    const { data, currentQuestionCount } = this.state;
+    const currentQuestion = this.getCurrentQuestion(currentQuestionCount - 1);
+    if (data.length <= 0) {
+      return (
+        <div className="app">
+          <p>Loading...</p>
+        </div>
+      );
+    }
+    debugger;
+    return (
+      <div className="app">
+        {data.length > 0 && (
+          <>
+            <div className="question-section">
+              <div className="question-count">
+                <Row>
+                  <span>
+                    Question {currentQuestion.id || currentQuestionCount}/
+                    {data.length}
+                  </span>
+                </Row>
+                <p className="question-text">{currentQuestion.question}</p>
+              </div>
+            </div>
+            <div className="answer-section">
+              <div className="radioBtn">
+                {this.generateOptions(
+                  currentQuestion.id,
+                  currentQuestion.allOptions
+                )}
+              </div>
+            </div>
+            <div className="d-flex align-items-center pt-3">
+              <div id="prev">
+                <button
+                  className="btn btn-primary"
+                  disabled={currentQuestionCount === 1}
+                  onClick={() => {
+                    this.setState((prevState) => ({
+                      ...prevState,
+                      currentQuestionCount:
+                        currentQuestionCount > 1
+                          ? currentQuestionCount - 1
+                          : data.length,
+                    }));
+                  }}
+                >
+                  Previous
+                </button>
+              </div>
+              <div className="ml-auto mr-sm-5">
+                <button
+                  className="btn btn-success"
+                  disabled={currentQuestionCount === data.length}
+                  onClick={() => {
+                    this.setState((prevState) => ({
+                      ...prevState,
+                      currentQuestionCount:
+                        currentQuestionCount < data.length
+                          ? currentQuestionCount + 1
+                          : 1,
+                    }));
+                  }}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
 }
+
+export default PracticeExam;

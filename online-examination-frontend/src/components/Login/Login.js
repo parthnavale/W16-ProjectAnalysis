@@ -43,7 +43,6 @@ class Login extends React.Component{
                     ...prevState,
                     redirect: true
                   }),()=>{
-                    
                     this.setState({ isLoggedIn: true });
                     localStorage.setItem("isLoggedIn","true");
                     this.props.history.push("/");

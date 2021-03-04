@@ -34,7 +34,7 @@
     font-size: 32px;
     color: #F56F08;
     font-weight: bolder;
-    margin: 10px 15%;
+    margin: 5px 1%;
 }
 
 .div1 {
@@ -44,7 +44,6 @@
 }
 
 .question-text {
-    margin: 20px 25%;
     font-size: 22px;
 }
 
@@ -69,7 +68,7 @@
 
 .radioBtn {
     padding: 5px;
-    margin: 5px 30%;
+    margin: 4px 4%;
 }
 
 .btn-primary {
