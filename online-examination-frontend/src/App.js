@@ -9,6 +9,8 @@ import Register from "./components/Register/Register";
 import Institution from "./components/Institution/Institution.js";
 import Pagenotfound from "./components/Error/Error";
 import PracticeExam from "./components/PracticeExam/PracticeExam.js";
+import BuyTest from "./components/BuyTest/BuyTest.js";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Taketest from './components/Taketest/Taketest';
 
@@ -54,6 +56,7 @@ class App extends React.Component {
 
           <Route path="/institution" component={Institution} />
           <Route path="/scores" component={Scores} />
+          <Route path="/buytest" component={BuyTest} />
           <Route path="/practice" component={PracticeExam} />
           <Route component={Pagenotfound} />
         </Switch>

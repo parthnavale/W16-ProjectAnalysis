@@ -32,7 +32,7 @@ class Main extends React.Component{
             <br/><br/>
             <LinkContainer to="/taketest">
               <Nav.Link>
-                <Button className="button1"  style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}} size="lg">TAKE A TEST</Button>
+                <Button style={{ margin:"0px 20px 0px 0px" , color: "white", background: "#F56F08", border: "0px #F56F08"}} size="lg">TAKE A TEST</Button>
             </Nav.Link>
             </LinkContainer>
           </Col>

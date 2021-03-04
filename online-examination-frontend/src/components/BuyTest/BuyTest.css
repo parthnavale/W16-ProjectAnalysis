@@ -1,0 +1,31 @@
+.classJumbotron {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 20px 300px;
+    width: 60%;
+}
+
+.classJumbotron p {
+    margin-left: 200px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #707070;
+}
+
+.jumbotron {
+    background-color: white !important;
+}
+
+#btnYes, #btnNo {
+    background-color: #F56F08;
+    border: 2px solid #F56F08;
+    font-weight: bolder;
+    width: 100px;
+}
+
+#btnYes {
+    margin-left: 220px;
+}
+
+#btnNo {
+    margin-left: 80px;
+}

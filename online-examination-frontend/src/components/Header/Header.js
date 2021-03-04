@@ -39,7 +39,7 @@ class Header extends React.Component {
         variant="light"
       >
         <div className="row col-md-12">
-          <div className="col-md-10 col-sm-12 col-xs-12 col-lg-4 float-left">
+          <div className="col-md-10 col-sm-12 col-xs-12 col-lg-8 float-left">
 
             <LinkContainer to="/">
               <Navbar.Brand className="header-main-heading" href="#home">
@@ -47,7 +47,7 @@ class Header extends React.Component {
               </Navbar.Brand>
             </LinkContainer>
           </div>
-          <div className="col-md-2 col-sm-12 col-xs-12 col-lg-8 float-right">
+          <div className="col-md-2 col-sm-12 col-xs-12 col-lg-12 float-right">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="float-right">
               <LinkContainer to="/scores">

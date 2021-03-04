@@ -8,7 +8,7 @@
     font-size: 16px;
     margin-top: 15px;
     letter-spacing: 2px;
-    margin-left: 30px;
+    margin-left: 0px;
 }
 
 .link-texet:hover {
@@ -17,9 +17,12 @@
     font-size: 16px;
     margin-top: 15px;
     letter-spacing: 2px;
-    margin-left: 30px;
+    margin-left: 0px;
 }
 
 .form1 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 50px;
+    padding: 30px;
+    width: 80%;
 }

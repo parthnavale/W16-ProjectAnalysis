@@ -163,8 +163,8 @@ class Register extends React.Component {
             <hr />
 
             <Button
-              style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}}
-              className="float-left"
+              style={{ color: "white", background: "#F56F08", border: "0px #F56F08", margin: "0px 50px 0px 0px"}}
+              
               type="reset"
               onClick={() => {
                 this.clearFormValues();
@@ -174,7 +174,6 @@ class Register extends React.Component {
             </Button>
             <Button
               style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}}
-              className="float-right"
               type="button"
               onClick={() => {
                 this.onSubmit();
