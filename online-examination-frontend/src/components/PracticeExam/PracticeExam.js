@@ -154,7 +154,7 @@ class PracticeExam extends React.Component {
                 )}
               </div>
             </div>
-            <div className="d-flex align-items-center pt-3">
+            <div className="d-flex justify-content-between">
               <div id="prev">
                 <button
                   className="btn btn-primary"
@@ -172,23 +172,30 @@ class PracticeExam extends React.Component {
                   Previous
                 </button>
               </div>
-              <div className="ml-auto mr-sm-5">
-                <button
-                  className="btn btn-success"
-                  disabled={currentQuestionCount === data.length}
-                  onClick={() => {
-                    this.setState((prevState) => ({
-                      ...prevState,
-                      currentQuestionCount:
-                        currentQuestionCount < data.length
-                          ? currentQuestionCount + 1
-                          : 1,
-                    }));
-                  }}
-                >
-                  Next
-                </button>
-              </div>
+              {!(currentQuestionCount === data.length) ? (
+                <div className="ml-auto mr-sm-5">
+                  <button
+                    className="btn btn-success"
+                    onClick={() => {
+                      this.setState((prevState) => ({
+                        ...prevState,
+                        currentQuestionCount:
+                          currentQuestionCount < data.length
+                            ? currentQuestionCount + 1
+                            : 1,
+                      }));
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              ) : (
+                <div className="ml-auto mr-sm-5">
+                  <button className="btn btn-success" onClick={() => {}}>
+                    Submit
+                  </button>
+                </div>
+              )}
             </div>
           </>
         )}
