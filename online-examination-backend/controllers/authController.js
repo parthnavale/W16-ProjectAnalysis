@@ -7,7 +7,6 @@ exports.login = (request, response) => {
     }
     DB.connect();
     let query = "select userId,fullName,address,dob,email,image,userCreated,userModified,isPurchased from users where email='" + loginData.email + "' and password='" + loginData.password + "' LIMIT 1";
-    console.log(query);
     DB.query(query, function (userList) {
         const userListJSONString = JSON.stringify(userList, null, 4)
         // set content type
@@ -32,7 +31,7 @@ exports.signup = (request, response) => {
     DB.connect();
     let query = "INSERT INTO USERS(fullName,password,address,dob,email,image,userCreated) ";
     query += `VALUES('${signUpData.name}','${signUpData.password}','${signUpData.address}','${signUpData.dateOfBirth}','${signUpData.email}','${signUpData.image}',NOW())`;
-    console.log(query);
+
     DB.query(query, function (userList) {
         const userListJSONString = JSON.stringify(userList, null, 4)
         // set content type
@@ -63,7 +62,6 @@ exports.purchase = (request, response) => {
     };
     DB.connect();
     let query = "UPDATE users SET isPurchased=1 WHERE userId='" + purchaseData.userId + "'";
-    console.log(query);
     DB.query(query, function (userList) {
         const userListJSONString = JSON.stringify(userList, null, 4)
         // set content type
