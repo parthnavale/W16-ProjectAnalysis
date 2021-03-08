@@ -31,6 +31,11 @@ userId=1
 GET http://localhost:8000/api/exam/listPracticeTestQuestion HTTP/1.1
 
 ###
+
+GET http://localhost:8000/api/exam/listActualTestQuestion HTTP/1.1
+
+###
+
 ## Endpoint for practice test where isPractice needs to be true
 POST http://localhost:8000/api/exam/submitTest HTTP/1.1
 Content-Type: application/x-www-form-urlencoded

@@ -2,6 +2,26 @@ const DB = require('../db_config/dao');
 const http = require('https');
 
 
+exports.listActualTestQuestion = (request, response) => {
+    http.get('https://opentdb.com/api.php?amount=25&category=9&difficulty=medium&type=multiple', (resp) => {
+        let data = '';
+
+        // Concatinate each chunk of data
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        // Once the response has finished, do something with the result
+        resp.on('end', () => {
+            response.json(JSON.parse(data));
+        });
+
+        // If an error occured, return the error to the user
+      }).on("error", (err) => {
+        response.json("Error: " + err.message);
+      });
+};
+
 exports.listPracticeTestQuestion = (request, response) => {
     http.get('https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple', (resp) => {
         let data = '';
@@ -21,8 +41,6 @@ exports.listPracticeTestQuestion = (request, response) => {
         response.json("Error: " + err.message);
       });
 };
-
-
 
 exports.submitTest = (request, response) => {
     const testData = {
