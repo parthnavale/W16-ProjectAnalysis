@@ -4,6 +4,7 @@ const router = express.Router();
 const controllers = require('../controllers/examController');
 
 router.get('/listPracticeTestQuestion', controllers.listPracticeTestQuestion);
-router.post('/submitPracticeTest', controllers.submitPracticeTest);
+router.post('/submitTest', controllers.submitTest);
+router.get('/listOfTestScoresOfUser', controllers.listOfTestScoresOfUser);
 
 module.exports = router;

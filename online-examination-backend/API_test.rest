@@ -31,8 +31,30 @@ userId=1
 GET http://localhost:8000/api/exam/listPracticeTestQuestion HTTP/1.1
 
 ###
-POST http://localhost:8000/api/exam/submitPracticeTest HTTP/1.1
+## Endpoint for practice test where isPractice needs to be true
+POST http://localhost:8000/api/exam/submitTest HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
-grade=52.4&userId=1
+grade=52.4&userId=1&isPractice=true
+###
+
+## Endpoint for actual test where isPractice needs to be false
+POST http://localhost:8000/api/exam/submitTest HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grade=53.8&userId=1&isPractice=false
+###
+
+
+## Endpoint for getting list of practice test scores where isPractice needs to be true
+
+GET http://localhost:8000/api/exam/listOfTestScoresOfUser?userId=1&isPractice=true HTTP/1.1
+
+###
+
+
+## Endpoint for getting list of actual test scores where isPractice needs to be false
+
+GET http://localhost:8000/api/exam/listOfTestScoresOfUser?userId=1&isPractice=false HTTP/1.1
+
 ###

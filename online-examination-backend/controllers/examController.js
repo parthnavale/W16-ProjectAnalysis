@@ -24,16 +24,17 @@ exports.listPracticeTestQuestion = (request, response) => {
 
 
 
-exports.submitPracticeTest = (request, response) => {
-    const practiceTestData = {
+exports.submitTest = (request, response) => {
+    const testData = {
         grade: request.body.grade,
-        userId: request.body.userId
+        userId: request.body.userId,
+        isPractice:request.body.isPractice
     };
     DB.connect();
     let query = "INSERT INTO RESULT(grade,userId,isPractice) ";
-    query += `VALUES('${practiceTestData.grade}','${practiceTestData.userId}',1)`;
-    DB.query(query, function (practiceTestResult) {
-        const jSONString = JSON.stringify(practiceTestResult, null, 4)
+    query += `VALUES('${testData.grade}','${testData.userId}',${testData.isPractice})`;
+    DB.query(query, function (testResult) {
+        const jSONString = JSON.stringify(testResult, null, 4)
         // set content type
         response.writeHead(200, {
             'Content-Type': 'application/json'
@@ -43,3 +44,24 @@ exports.submitPracticeTest = (request, response) => {
         response.end(jSONString)
     });
 };
+
+exports.listOfTestScoresOfUser = (request, response) => {
+    const testData = {
+        userId: request.query.userId,
+        isPractice:request.query.isPractice
+    };
+    DB.connect();
+    let query = `select * from result where userId=${testData.userId} and isPractice=${testData.isPractice}`;
+    DB.query(query, function (testResult) {
+        const jSONString = JSON.stringify(testResult, null, 4)
+        // set content type
+        response.writeHead(200, {
+            'Content-Type': 'application/json'
+        })
+        DB.disconnect();
+        // send out a string
+        response.end(jSONString)
+    });
+};
+
+
