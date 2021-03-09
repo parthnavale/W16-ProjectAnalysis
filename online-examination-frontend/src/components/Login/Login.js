@@ -42,7 +42,10 @@ class Login extends React.Component {
                 ...prevState,
               }),
               () => {
-                context.setAuth({ isLoggedIn: true, user: result[0] });
+                let userObj = result[0];
+                userObj.isActualTestGiven = userObj.isActualTestGiven === 1 ? true : false;
+                userObj.isPurchased = userObj.isPurchased === 1 ? true : false;
+                context.setAuth({ isLoggedIn: true, user: userObj });
                 this.props.history.push("/");
               }
             );
