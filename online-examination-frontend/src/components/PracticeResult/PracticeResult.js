@@ -18,11 +18,11 @@ export default class PracticeResult extends React.Component {
     }
 
     componentDidMount() {
-                this._getData();
+        this._getData();
     }
     _getData = () => {
         let userObj = JSON.parse(localStorage.getItem("user"));
-        fetch("http://localhost:8000/api/exam/listOfTestScoresOfUser?userId="+userObj.userId+"&isPractice=true")
+        fetch("http://localhost:8000/api/exam/listOfTestScoresOfUser?userId=" + userObj.userId + "&isPractice=true")
             .then(response => {
                 if (response.ok) {
                     return response;

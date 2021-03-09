@@ -85,7 +85,7 @@ class PracticeExam extends React.Component {
         userAnswers &&
         answerIndex !== -1 &&
         userAnswers[answerIndex].selectedAnswer ===
-          this.showHTMLSafeString(item)
+        this.showHTMLSafeString(item)
       ) {
         isChecked = true;
       }
@@ -144,25 +144,24 @@ class PracticeExam extends React.Component {
       if (
         answerIndex !== -1 &&
         userAnswer.selectedAnswer ===
-          this.showHTMLSafeString(data[answerIndex].correct_answer)
+        this.showHTMLSafeString(data[answerIndex].correct_answer)
       ) {
         result++;
       }
-
-      this.setState(
-        (prevState) => ({
-          ...prevState,
-          finalScore: {
-            correctAnswer: result,
-            percentage: (result * 100) / data.length,
-          },
-          showScore: true,
-        }),
-        () => {
-          this.saveScore(userId);
-        }
-      );
     });
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        finalScore: {
+          correctAnswer: result,
+          percentage: (result * 100) / data.length,
+        },
+        showScore: true,
+      }),
+      () => {
+        this.saveScore(userId);
+      }
+    );
   }
 
   saveScore(userId) {
