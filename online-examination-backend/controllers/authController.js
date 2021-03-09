@@ -6,7 +6,7 @@ exports.login = (request, response) => {
         password: request.body.password,
     }
     DB.connect();
-    let query = "select userId,fullName,address,dob,email,image,userCreated,userModified,isPurchased from users where email='" + loginData.email + "' and password='" + loginData.password + "' LIMIT 1";
+    let query = "select userId,fullName,address,dob,email,image,userCreated,userModified,isPurchased, (select count(*) from result r where r.userId=u.userId and isPractice=false) as isActualTestGiven from users u  where email='" + loginData.email + "' and password='" + loginData.password + "' LIMIT 1";
     DB.query(query, function (userList) {
         const userListJSONString = JSON.stringify(userList, null, 4)
         // set content type
