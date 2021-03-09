@@ -51,11 +51,15 @@ class Taketest extends React.Component {
                     </p>
                   </Col>
                   <Col>
-                    <LinkContainer to="/buytest">
-                      <Nav.Link>
-                        <Button id="btnBuy">Buy now</Button>
-                      </Nav.Link>
-                    </LinkContainer>
+                    {
+                      context.user.isPurchased ? (<Button disabled={context.user.isPurchased} className={context.user.isPurchased ? 'disabled-btn' : ''}>Purchased</Button>) : (
+                        <LinkContainer to="/buytest">
+                          <Nav.Link>
+                            <Button id="btnBuy">Buy now</Button>
+                          </Nav.Link>
+                        </LinkContainer>
+                      )
+                    }
                   </Col>
                 </Row>
               </Jumbotron>
@@ -73,8 +77,7 @@ class Taketest extends React.Component {
                     </p>
                   </Col>
                   <Col>
-                    {" "}
-                    <Button>Take the Test</Button>
+                    <Button disabled={!context.user.isPurchased} className={!context.user.isPurchased ? 'disabled-btn' : ""}>Take the Test</Button>
                   </Col>
                 </Row>
               </Jumbotron>

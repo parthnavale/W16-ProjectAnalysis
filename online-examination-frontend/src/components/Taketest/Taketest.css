@@ -1,59 +1,71 @@
 .design-layout {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 260px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 260px;
 }
 
-#row2, #row3 {
-    margin-top: -40px;
+#row2,
+#row3 {
+  margin-top: -40px;
 }
 
 #btnBuy {
-    background-color: white;
-    border: 2px solid #F56F08;
-    color: #F56F08;
+  background-color: white;
+  border: 2px solid #f56f08;
+  color: #f56f08;
 }
 
 #btnBuy:hover {
-    background-color: #F56F08;
-    color: white;
+  background-color: #f56f08;
+  color: white;
 }
 
 .jumbotron {
-    background-color: white !important;
+  background-color: white !important;
 }
 
+.disabled-btn {
+  background-color: #f56f08 !important;
+  border: #f56f08 !important;
+}
 .design-layout button {
-    background-color: #F56F08;
-    border: #F56F08;
-    color: white;
-    margin-top: 80px;
-    padding: 10px;
-    font-weight: bolder;
-    text-transform: uppercase;
-    width: 50%;
+  background-color: #f56f08;
+  border: #f56f08;
+  color: white;
+  margin-top: 80px;
+  padding: 10px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  width: 50%;
 }
 
 .design-layout button:hover {
-    background-color: #ff8500;
-    border: #F56F08;
-    color: white;
+  background-color: #ff8500;
+  border: #f56f08;
+  color: white;
+}
+
+.design-layout button:active,
+.design-layout button:focus {
+  background-color: #ff8500 !important;
+  border: #f56f08 !important;
+  color: white !important;
 }
 
 .design-layout p {
-    font-size: 18px;
-    color: #707070;
+  font-size: 18px;
+  color: #707070;
 }
 
 .paraQues {
-    color: #F56F08 !important;
-    font-weight: bold;
+  color: #f56f08 !important;
+  font-weight: bold;
 }
 
 .headingTest {
-    font-size: 40px;
-    color: #707070;
+  font-size: 40px;
+  color: #707070;
 }
 
 .col11 {
-    margin-left: -180px;
+  margin-left: -180px;
 }

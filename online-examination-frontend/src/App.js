@@ -47,7 +47,7 @@ class App extends React.Component {
     this.setState((prevState) => ({
       ...prevState,
       isLoggedIn: isLoggedIn ? true : false,
-      user: userObj && Object.keys(userObj).length > 0 ? userObj : null,
+      user: userObj && Object.keys(userObj).length > 0 ? JSON.parse(userObj) : null,
     }));
   }
   setValuesOnLocalStorage() {

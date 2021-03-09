@@ -32,9 +32,14 @@ class Header extends React.Component {
           <div className="col-md-2 col-sm-12 col-xs-12 col-lg-12 float-right">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="float-right">
+              <LinkContainer to="/taketest">
+                <Nav.Link>
+                  <h4 className="linkText">Take Test</h4>
+                </Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/scores">
                 <Nav.Link>
-                  <h4 className="linkText">Test-Takers</h4>
+                  <h4 className="linkText">Score Comparision</h4>
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/institution">
