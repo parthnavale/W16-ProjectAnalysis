@@ -11,9 +11,10 @@ import Pagenotfound from "./components/Error/Error";
 import PracticeExam from "./components/PracticeExam/PracticeExam.js";
 import BuyTest from "./components/BuyTest/BuyTest.js";
 import ActualExam from "./components/ActualExam/ActualExam.js";
+import Taketest from "./components/Taketest/Taketest";
+import PracticeResult from "./components/PracticeResult/PracticeResult";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Taketest from "./components/Taketest/Taketest";
 
 export const AuthContext = React.createContext();
 
@@ -77,6 +78,7 @@ class App extends React.Component {
               <Route path="/scores" component={Scores} />
               <Route path="/buytest" component={BuyTest} />
               <Route path="/practice" component={PracticeExam} />
+              <Route path="/practiceresult" component={PracticeResult} />
               <Route path="/actualtest" component={ActualExam} />
               <Route component={Pagenotfound} />
             </Switch>
