@@ -7,9 +7,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { AuthContext } from "../../App";
 
 const BuyTest = (props) => {
-
   function purchaseTest(context) {
-    debugger
     fetch("http://localhost:8000/api/auth/purchase", {
       method: "post",
       body: JSON.stringify({ userId: context.user.userId }),
@@ -53,26 +51,28 @@ const BuyTest = (props) => {
               <h1 className="display-4">Buy Test</h1>
               <p className="">
                 <br />
-                  Are you sure, you want to buy a test?
-                </p>
+                Are you sure, you want to buy a test?
+              </p>
               <br />
               <div className="row center">
-                <Button id="btnYes" onClick={() => {
-                  purchaseTest(context);
-                }}>
+                <Button
+                  id="btnYes"
+                  onClick={() => {
+                    purchaseTest(context);
+                  }}
+                >
                   Yes
-                  </Button>
+                </Button>
                 <LinkContainer to="/taketest">
                   <Button id="btnNo">No</Button>
                 </LinkContainer>
               </div>
-
             </Jumbotron>
-          </div>)
+          </div>
+        );
       }}
     </AuthContext.Consumer>
   );
 };
-
 
 export default BuyTest;
