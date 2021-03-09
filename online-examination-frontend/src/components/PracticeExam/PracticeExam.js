@@ -1,11 +1,10 @@
 import React from "react";
 import "./PracticeExam.css";
 import { Form, Row } from "react-bootstrap";
-
+import he from "he";
 class PracticeExam extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       data: [],
       error: null,
@@ -75,7 +74,8 @@ class PracticeExam extends React.Component {
       if (
         userAnswers &&
         answerIndex !== -1 &&
-        userAnswers[answerIndex].selectedAnswer === item
+        userAnswers[answerIndex].selectedAnswer ===
+          this.showHTMLSafeString(item)
       ) {
         isChecked = true;
       }
@@ -85,12 +85,12 @@ class PracticeExam extends React.Component {
             type="radio"
             name="radio"
             checked={isChecked}
-            value={item}
+            value={this.showHTMLSafeString(item)}
             onChange={(e) => {
               this.optionSelected(questionId, e.target.value);
             }}
           />
-          {item}
+          {this.showHTMLSafeString(item)}
         </Row>
       );
     });
@@ -120,6 +120,11 @@ class PracticeExam extends React.Component {
       userAnswers,
     }));
   }
+
+  showHTMLSafeString(text) {
+    return he.decode(text);
+  }
+
   render() {
     const { data, currentQuestionCount } = this.state;
     const currentQuestion = this.getCurrentQuestion(currentQuestionCount - 1);
@@ -130,7 +135,6 @@ class PracticeExam extends React.Component {
         </div>
       );
     }
-
     return (
       <div className="app">
         {data.length > 0 && (
@@ -143,7 +147,9 @@ class PracticeExam extends React.Component {
                     {data.length}
                   </span>
                 </Row>
-                <p className="question-text">{currentQuestion.question}</p>
+                <p className="question-text">
+                  {this.showHTMLSafeString(currentQuestion.question)}
+                </p>
               </div>
             </div>
             <div className="answer-section">
@@ -154,8 +160,8 @@ class PracticeExam extends React.Component {
                 )}
               </div>
             </div>
-            <div className="d-flex justify-content-between">
-              <div id="prev">
+            <div className="row">
+              <div id="prev" className="col-md-6 col-lg-4">
                 <button
                   className="btn btn-primary"
                   disabled={currentQuestionCount === 1}
@@ -191,7 +197,10 @@ class PracticeExam extends React.Component {
                 </div>
               ) : (
                 <div className="ml-auto mr-sm-5">
-                  <button className="btn btn-success" onClick={() => {}}>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => this.submitTest()}
+                  >
                     Submit
                   </button>
                 </div>
