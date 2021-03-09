@@ -1,8 +1,10 @@
 import React from "react";
 import "./ActualExam.css";
-import { Form, Row } from "react-bootstrap";
+import { Form, Row, Button } from "react-bootstrap";
 import he from "he";
-
+import { AuthContext } from "../../App";
+import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 class ActualExam extends React.Component {
   constructor(props) {
@@ -13,6 +15,11 @@ class ActualExam extends React.Component {
       count: 0,
       currentQuestionCount: 1,
       userAnswers: [],
+      finalScore: {
+        correctAnswer: 0,
+        percentage: 0,
+      },
+      showScore: false,
     };
   }
 
@@ -127,8 +134,79 @@ class ActualExam extends React.Component {
     return he.decode(text);
   }
 
+  submitTest(userId) {
+    let { userAnswers, data } = this.state;
+    let result = 0;
+    userAnswers.forEach((userAnswer) => {
+      const answerIndex = data.findIndex((x) => x.id === userAnswer.questionId);
+      if (
+        answerIndex !== -1 &&
+        userAnswer.selectedAnswer ===
+          this.showHTMLSafeString(data[answerIndex].correct_answer)
+      ) {
+        result++;
+      }
+
+      this.setState(
+        (prevState) => ({
+          ...prevState,
+          finalScore: {
+            correctAnswer: result,
+            percentage: (result * 100) / data.length,
+          },
+          showScore: true,
+        }),
+        () => {
+          this.saveScore(userId);
+        }
+      );
+    });
+  }
+
+  saveScore(userId) {
+    const { finalScore } = this.state;
+    fetch("http://localhost:8000/api/exam/submitTest", {
+      method: "post",
+      body: JSON.stringify({
+        grade: finalScore.percentage,
+        userId: userId,
+        isPractice: false,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+
+  showResult() {
+    const { finalScore, data } = this.state;
+
+    return (
+      <div className="question-section">
+        <h4>Your final score</h4>
+        <p className="question-text">Total Questions: {data.length}</p>
+        <p className="question-text">
+          Your correct Answers: {finalScore.correctAnswer}
+        </p>
+        <p className="question-text">Percentage: {finalScore.percentage}%</p>
+        <LinkContainer to="/taketest">
+          <Button id="btnBack">Go Back</Button>
+        </LinkContainer>
+      </div>
+    );
+  }
+
   render() {
-    const { data, currentQuestionCount } = this.state;
+    const { data, currentQuestionCount, userAnswers, showScore } = this.state;
     const currentQuestion = this.getCurrentQuestion(currentQuestionCount - 1);
     if (data.length <= 0) {
       return (
@@ -138,79 +216,90 @@ class ActualExam extends React.Component {
       );
     }
     return (
-      <div className="app">
-        {data.length > 0 && (
-          <>
-            <div className="question-section">
-              <div className="question-count">
-                <Row>
-                  <span>
-                    Question {currentQuestion.id || currentQuestionCount}/
-                    {data.length}
-                  </span>
-                </Row>
-                <p className="question-text">
-                  {this.showHTMLSafeString(currentQuestion.question)}
-                </p>
-              </div>
-            </div>
-            <div className="answer-section">
-              <div className="radioBtn">
-                {this.generateOptions(
-                  currentQuestion.id,
-                  currentQuestion.allOptions
-                )}
-              </div>
-            </div>
-            <div className="row">
-              <div id="prev" className="col-md-6 col-lg-4">
-                <button
-                  className="btn btn-primary"
-                  disabled={currentQuestionCount === 1}
-                  onClick={() => {
-                    this.setState((prevState) => ({
-                      ...prevState,
-                      currentQuestionCount:
-                        currentQuestionCount > 1
-                          ? currentQuestionCount - 1
-                          : data.length,
-                    }));
-                  }}
-                >
-                  Previous
-                </button>
-              </div>
-              {!(currentQuestionCount === data.length) ? (
-                <div className="ml-auto mr-sm-5">
-                  <button
-                    className="btn btn-success"
-                    onClick={() => {
-                      this.setState((prevState) => ({
-                        ...prevState,
-                        currentQuestionCount:
-                          currentQuestionCount < data.length
-                            ? currentQuestionCount + 1
-                            : 1,
-                      }));
-                    }}
-                  >
-                    Next
-                  </button>
-                </div>
-              ) : (
-                <div className="ml-auto mr-sm-5">
-                  <button
-                    className="btn btn-success"
-                    onClick={() => this.submitTest()}
-                  >
-                    Submit
-                  </button>
-                </div>
+      <AuthContext.Consumer>
+        {(context) => {
+          if (!context.isLoggedIn) {
+            return <Redirect to="/login" />;
+          }
+          return (
+            <div className="app">
+              {showScore && this.showResult()}
+              {data.length > 0 && !showScore && (
+                <>
+                  <div className="question-section">
+                    <div className="question-count">
+                      <Row>
+                        <span>
+                          Question {currentQuestion.id || currentQuestionCount}/
+                          {data.length}
+                        </span>
+                      </Row>
+                      <p className="question-text">
+                        {this.showHTMLSafeString(currentQuestion.question)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="answer-section">
+                    <div className="radioBtn">
+                      {this.generateOptions(
+                        currentQuestion.id,
+                        currentQuestion.allOptions
+                      )}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div id="prev" className="col-md-6 col-lg-4">
+                      <button
+                        className="btn btn-primary"
+                        disabled={currentQuestionCount === 1}
+                        onClick={() => {
+                          this.setState((prevState) => ({
+                            ...prevState,
+                            currentQuestionCount:
+                              currentQuestionCount > 1
+                                ? currentQuestionCount - 1
+                                : data.length,
+                          }));
+                        }}
+                      >
+                        Previous
+                      </button>
+                    </div>
+                    {!(currentQuestionCount === data.length) ? (
+                      <div className="ml-auto mr-sm-5">
+                        <button
+                          className="btn btn-success"
+                          onClick={() => {
+                            this.setState((prevState) => ({
+                              ...prevState,
+                              currentQuestionCount:
+                                currentQuestionCount < data.length
+                                  ? currentQuestionCount + 1
+                                  : 1,
+                            }));
+                          }}
+                        >
+                          Next
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="ml-auto mr-sm-5">
+                        <button
+                          className="btn btn-success"
+                          disabled={data.length !== userAnswers.length}
+                          onClick={() => this.submitTest()}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
               )}
             </div>
-          </>
-        )}
-      </div>
+          );
+        }}
+      </AuthContext.Consumer>
     );
   }
 }
