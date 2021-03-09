@@ -146,21 +146,20 @@ class ActualExam extends React.Component {
       ) {
         result++;
       }
-
-      this.setState(
-        (prevState) => ({
-          ...prevState,
-          finalScore: {
-            correctAnswer: result,
-            percentage: (result * 100) / data.length,
-          },
-          showScore: true,
-        }),
-        () => {
-          this.saveScore(userId);
-        }
-      );
     });
+    this.setState(
+      (prevState) => ({
+        ...prevState,
+        finalScore: {
+          correctAnswer: result,
+          percentage: (result * 100) / data.length,
+        },
+        showScore: true,
+      }),
+      () => {
+        this.saveScore(userId);
+      }
+    );
   }
 
   saveScore(userId) {
@@ -220,6 +219,9 @@ class ActualExam extends React.Component {
         {(context) => {
           if (!context.isLoggedIn) {
             return <Redirect to="/login" />;
+          }
+          if (!context.isPurchased || context.isActualTestGiven) {
+            return <Redirect to="/taketest" />;
           }
           return (
             <div className="app">
@@ -287,7 +289,7 @@ class ActualExam extends React.Component {
                         <button
                           className="btn btn-success"
                           disabled={data.length !== userAnswers.length}
-                          onClick={() => this.submitTest()}
+                          onClick={() => this.submitTest(context.user.userId)}
                         >
                           Submit
                         </button>
