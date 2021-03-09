@@ -77,7 +77,11 @@ class Taketest extends React.Component {
                     </p>
                   </Col>
                   <Col>
-                    <Button disabled={!context.user.isPurchased} className={!context.user.isPurchased ? 'disabled-btn' : ""}>Take the Test</Button>
+                    <LinkContainer to="/actualtest">
+                      <Nav.Link>
+                      <Button disabled={!context.user.isPurchased} className={!context.user.isPurchased ? 'disabled-btn' : ""}>Take the Test</Button>
+                      </Nav.Link>
+                    </LinkContainer>
                   </Col>
                 </Row>
               </Jumbotron>
