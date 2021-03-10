@@ -84,22 +84,26 @@ class ActualExam extends React.Component {
         userAnswers &&
         answerIndex !== -1 &&
         userAnswers[answerIndex].selectedAnswer ===
-        this.showHTMLSafeString(item)
+          this.showHTMLSafeString(item)
       ) {
         isChecked = true;
       }
       return (
-        <Row key={index}>
+        <Row key={index} class="form-check">
           <Form.Check
             type="radio"
             name="radio"
+            id={index + 1}
+            class="form-check-input"
             checked={isChecked}
             value={this.showHTMLSafeString(item)}
             onChange={(e) => {
               this.optionSelected(questionId, e.target.value);
             }}
           />
-          {this.showHTMLSafeString(item)}
+          <label class="form-check-label" for={index + 1}>
+            {this.showHTMLSafeString(item)}
+          </label>
         </Row>
       );
     });
@@ -142,7 +146,7 @@ class ActualExam extends React.Component {
       if (
         answerIndex !== -1 &&
         userAnswer.selectedAnswer ===
-        this.showHTMLSafeString(data[answerIndex].correct_answer)
+          this.showHTMLSafeString(data[answerIndex].correct_answer)
       ) {
         result++;
       }
@@ -291,7 +295,9 @@ class ActualExam extends React.Component {
                         <button
                           className="btn btn-success"
                           disabled={data.length !== userAnswers.length}
-                          onClick={() => this.submitTest(context, context.user.userId)}
+                          onClick={() =>
+                            this.submitTest(context, context.user.userId)
+                          }
                         >
                           Submit
                         </button>
