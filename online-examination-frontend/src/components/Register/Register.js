@@ -28,46 +28,58 @@ class Register extends React.Component {
   }
 
   onSubmit() {
-    fetch("http://localhost:8000/api/auth/signup", {
-      method: "post",
-      body: JSON.stringify(this.state),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(
-        (result) => {
-          if (result) {
-            alert("Successfully signed up!!.");
-            this.clearFormValues();
-          }
+    const { password, confirmPassword } = this.state;
+    if (password !== confirmPassword) {
+      alert("Password Doesnt Match");
+    } else {
+      fetch("http://localhost:8000/api/auth/signup", {
+        method: "post",
+        body: JSON.stringify(this.state),
+        headers: {
+          "Content-Type": "application/json",
         },
-        (error) => {
-          console.error(error);
-        }
-      );
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(
+          (result) => {
+            if (result) {
+              alert("Successfully signed up!!.");
+              this.clearFormValues();
+            }
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+    }
   }
   clearFormValues() {
     this.setState({
       ...initialState,
     });
   }
-  checkAllFieldsHasData(){
+  checkAllFieldsHasData() {
     const {
-        name,
-        address,
-        email,
-        password,
-        confirmPassword,
-        dateOfBirth,
-      } = this.state;
-      if(name.length>0 && address.length>0 && email.length>0 && password.length>0 && confirmPassword.length>0 && dateOfBirth.length>0){
-          return false;
-      }
-      return true;
+      name,
+      address,
+      email,
+      password,
+      confirmPassword,
+      dateOfBirth,
+    } = this.state;
+    if (
+      name.length > 0 &&
+      address.length > 0 &&
+      email.length > 0 &&
+      password.length > 0 &&
+      confirmPassword.length > 0 &&
+      dateOfBirth.length > 0
+    ) {
+      return false;
+    }
+    return true;
   }
   render() {
     const {
@@ -83,7 +95,8 @@ class Register extends React.Component {
       <div className="container-fluid">
         <div className="d-flex justify-content-center">
           <Form className="form1">
-            <h2 className="display-4">Create an account</h2><br/>
+            <h2 className="display-4">Create an account</h2>
+            <br />
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -163,8 +176,12 @@ class Register extends React.Component {
             <hr />
 
             <Button
-              style={{ color: "white", background: "#F56F08", border: "0px #F56F08", margin: "0px 50px 0px 0px"}}
-              
+              style={{
+                color: "white",
+                background: "#F56F08",
+                border: "0px #F56F08",
+                margin: "0px 50px 0px 0px",
+              }}
               type="reset"
               onClick={() => {
                 this.clearFormValues();
@@ -173,7 +190,11 @@ class Register extends React.Component {
               Reset
             </Button>
             <Button
-              style={{ color: "white", background: "#F56F08", border: "0px #F56F08"}}
+              style={{
+                color: "white",
+                background: "#F56F08",
+                border: "0px #F56F08",
+              }}
               type="button"
               onClick={() => {
                 this.onSubmit();
