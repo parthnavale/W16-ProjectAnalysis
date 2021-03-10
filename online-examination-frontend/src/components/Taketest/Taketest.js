@@ -28,12 +28,16 @@ class Taketest extends React.Component {
                       <p className="paraQues">10 ques</p>
                     </p>
                   </Col>
-                  <Col>
-                    <LinkContainer to="/practice">
-                      <Nav.Link>
-                        <Button>Practice Test</Button>
-                      </Nav.Link>
-                    </LinkContainer>
+                  <Col className="ml-150">
+                    <Nav>
+                      <LinkContainer to="/practice">
+                        <Nav.Link><Button>Practice Test</Button></Nav.Link>
+                      </LinkContainer>
+                  
+                      <LinkContainer to="/practiceresult">
+                        <Nav.Link><Button className="btnSeeScores">See Scores</Button></Nav.Link>
+                      </LinkContainer> 
+                    </Nav>
                   </Col>
                 </Row>
               </Jumbotron>
@@ -50,9 +54,9 @@ class Taketest extends React.Component {
                       <p className="paraQues">$50 CAD</p>
                     </p>
                   </Col>
-                  <Col>
+                  <Col className="ml-150">
                     {
-                      context.user.isPurchased ? (<Button disabled={context.user.isPurchased} className={context.user.isPurchased ? 'disabled-btn' : ''}>Purchased</Button>) : (
+                      context.user.isPurchased ? (<Button id="btnPurchase" disabled={context.user.isPurchased} className={context.user.isPurchased ? 'disabled-btn' : ''}>Purchased</Button>) : (
                         <LinkContainer to="/buytest">
                           <Nav.Link>
                             <Button id="btnBuy">Buy now</Button>
@@ -76,12 +80,19 @@ class Taketest extends React.Component {
                       <p className="paraQues">25 ques</p>
                     </p>
                   </Col>
-                  <Col>
-                    <LinkContainer to="/actualtest">
-                      <Nav.Link>
-                      <Button disabled={!context.user.isPurchased} className={!context.user.isPurchased ? 'disabled-btn' : ""}>Take the Test</Button>
-                      </Nav.Link>
-                    </LinkContainer>
+                  <Col className="ml-150">
+                    <Nav>
+                    <Nav.Item>
+                      <LinkContainer to="/actualtest">
+                        <Nav.Link><Button disabled={!context.user.isPurchased} className={!context.user.isPurchased ? 'disabled-btn' : ""}>Take the Test</Button></Nav.Link>
+                      </LinkContainer>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <LinkContainer to="/actualresult">
+                        <Nav.Link><Button className="btnSeeScores">See Scores</Button></Nav.Link>
+                      </LinkContainer> 
+                    </Nav.Item> 
+                    </Nav>
                   </Col>
                 </Row>
               </Jumbotron>

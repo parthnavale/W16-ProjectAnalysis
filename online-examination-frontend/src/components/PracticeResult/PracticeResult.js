@@ -1,12 +1,13 @@
 import React from "react";
 
 
+import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-
+import { AuthContext } from "../../App";
 
 const initialState = {
     resultList: []
@@ -72,18 +73,37 @@ export default class PracticeResult extends React.Component {
     render() {
         const resultList = this.resultsGenerator() || [];
         return (
-            <React.Fragment>
-                <br />
-                <h1 className="display-4" >List of grades</h1>
-                <p className="paragraph1">These are the practice test results.</p>
-                <BootstrapTable
-                    bootstrap4
-                    keyField="resultId"
-                    data={resultList}
-                    columns={this.columnNames()}
-                    pagination={paginationFactory({ sizePerPage: 5 })}
-                />
-            </React.Fragment>
+            <AuthContext.Consumer>
+                {(context)=>{
+                    if (!context.isLoggedIn) {
+                        return <Redirect to="/login" />;
+                    }
+                    
+                    return (
+                        <React.Fragment>
+                            <br />
+                            {
+                                (!resultList || resultList.length<=0) && (<h3 className="paragraph1" >No Result Available yet</h3>) 
+                            }
+                            {resultList && resultList.lenght>0 && (
+                                <React.Fragment>
+                                    <h1 className="display-4" >List of grades</h1>
+                                    <p className="paragraph1">These are the practice test results.</p>
+                                    <BootstrapTable
+                                        bootstrap4
+                                        keyField="resultId"
+                                        data={resultList}
+                                        columns={this.columnNames()}
+                                        pagination={paginationFactory({ sizePerPage: 5 })}
+                                    />
+                            </React.Fragment>
+                            )}
+                        </React.Fragment>
+                    )
+                }}
+                
+                
+            </AuthContext.Consumer>
         );
     }
 }
