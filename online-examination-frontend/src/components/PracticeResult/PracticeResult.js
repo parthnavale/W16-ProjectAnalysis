@@ -74,18 +74,18 @@ export default class PracticeResult extends React.Component {
         const resultList = this.resultsGenerator() || [];
         return (
             <AuthContext.Consumer>
-                {(context)=>{
+                {(context) => {
                     if (!context.isLoggedIn) {
                         return <Redirect to="/login" />;
                     }
-                    
+
                     return (
                         <React.Fragment>
                             <br />
                             {
-                                (!resultList || resultList.length<=0) && (<h3 className="paragraph1" >No Result Available yet</h3>) 
+                                (!resultList || resultList.length <= 0) && (<h3 className="paragraph1" >No Result Available yet</h3>)
                             }
-                            {resultList && resultList.lenght>0 && (
+                            {resultList && resultList.length > 0 && (
                                 <React.Fragment>
                                     <h1 className="display-4" >List of grades</h1>
                                     <p className="paragraph1">These are the practice test results.</p>
@@ -96,13 +96,13 @@ export default class PracticeResult extends React.Component {
                                         columns={this.columnNames()}
                                         pagination={paginationFactory({ sizePerPage: 5 })}
                                     />
-                            </React.Fragment>
+                                </React.Fragment>
                             )}
                         </React.Fragment>
                     )
                 }}
-                
-                
+
+
             </AuthContext.Consumer>
         );
     }

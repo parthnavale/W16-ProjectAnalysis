@@ -84,7 +84,7 @@ class ActualExam extends React.Component {
         userAnswers &&
         answerIndex !== -1 &&
         userAnswers[answerIndex].selectedAnswer ===
-          this.showHTMLSafeString(item)
+        this.showHTMLSafeString(item)
       ) {
         isChecked = true;
       }
@@ -134,7 +134,7 @@ class ActualExam extends React.Component {
     return he.decode(text);
   }
 
-  submitTest(userId) {
+  submitTest(context, userId) {
     let { userAnswers, data } = this.state;
     let result = 0;
     userAnswers.forEach((userAnswer) => {
@@ -142,7 +142,7 @@ class ActualExam extends React.Component {
       if (
         answerIndex !== -1 &&
         userAnswer.selectedAnswer ===
-          this.showHTMLSafeString(data[answerIndex].correct_answer)
+        this.showHTMLSafeString(data[answerIndex].correct_answer)
       ) {
         result++;
       }
@@ -157,12 +157,12 @@ class ActualExam extends React.Component {
         showScore: true,
       }),
       () => {
-        this.saveScore(userId);
+        this.saveScore(context, userId);
       }
     );
   }
 
-  saveScore(userId) {
+  saveScore(context, userId) {
     const { finalScore } = this.state;
     fetch("http://localhost:8000/api/exam/submitTest", {
       method: "post",
@@ -178,7 +178,9 @@ class ActualExam extends React.Component {
       .then((response) => response.json())
       .then(
         (result) => {
-          console.log(result);
+          let user = { ...context.user };
+          user.isActualTestGiven = true;
+          context.setAuth({ isLoggedIn: true, user: user });
         },
         (error) => {
           console.error(error);
@@ -220,7 +222,7 @@ class ActualExam extends React.Component {
           if (!context.isLoggedIn) {
             return <Redirect to="/login" />;
           }
-          if (!context.isPurchased || context.isActualTestGiven) {
+          if (!context.isPurchased && context.isActualTestGiven) {
             return <Redirect to="/taketest" />;
           }
           return (
@@ -289,7 +291,7 @@ class ActualExam extends React.Component {
                         <button
                           className="btn btn-success"
                           disabled={data.length !== userAnswers.length}
-                          onClick={() => this.submitTest(context.user.userId)}
+                          onClick={() => this.submitTest(context, context.user.userId)}
                         >
                           Submit
                         </button>

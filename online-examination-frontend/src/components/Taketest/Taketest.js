@@ -33,10 +33,10 @@ class Taketest extends React.Component {
                       <LinkContainer to="/practice">
                         <Nav.Link><Button>Practice Test</Button></Nav.Link>
                       </LinkContainer>
-                  
+
                       <LinkContainer to="/practiceresult">
                         <Nav.Link><Button className="btnSeeScores">See Scores</Button></Nav.Link>
-                      </LinkContainer> 
+                      </LinkContainer>
                     </Nav>
                   </Col>
                 </Row>
@@ -82,16 +82,16 @@ class Taketest extends React.Component {
                   </Col>
                   <Col className="ml-150">
                     <Nav>
-                    <Nav.Item>
-                      <LinkContainer to="/actualtest">
-                        <Nav.Link><Button disabled={!context.user.isPurchased} className={!context.user.isPurchased ? 'disabled-btn' : ""}>Take the Test</Button></Nav.Link>
-                      </LinkContainer>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <LinkContainer to="/actualresult">
-                        <Nav.Link><Button className="btnSeeScores">See Scores</Button></Nav.Link>
-                      </LinkContainer> 
-                    </Nav.Item> 
+                      <Nav.Item>
+                        <LinkContainer to="/actualtest">
+                          <Nav.Link><Button disabled={!context.user.isPurchased || context.user.isActualTestGiven} className={!context.user.isPurchased || context.user.isActualTestGiven ? 'disabled-btn' : ""}>Take the Test</Button></Nav.Link>
+                        </LinkContainer>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <LinkContainer to="/actualresult">
+                          <Nav.Link><Button className="btnSeeScores">See Scores</Button></Nav.Link>
+                        </LinkContainer>
+                      </Nav.Item>
                     </Nav>
                   </Col>
                 </Row>
