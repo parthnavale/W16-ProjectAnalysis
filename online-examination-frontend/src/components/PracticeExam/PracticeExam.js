@@ -45,7 +45,7 @@ class PracticeExam extends React.Component {
               });
             }
           }
-          console.table(newData);
+          
           this.setState({
             isLoaded: true,
             data: newData,
