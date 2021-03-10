@@ -12,7 +12,8 @@ const {
     HOST,
     USER,
     PASSWORD,
-    DATABASE
+    DATABASE,
+    MYSQL_PORT
 } = process.env;
 
 function connect() {
@@ -21,6 +22,7 @@ function connect() {
         user: USER,
         password: PASSWORD,
         database: DATABASE,
+        port: MYSQL_PORT,
         multipleStatements: true
     });
     con.connect(function (err) {
@@ -34,6 +36,7 @@ function createDatabaseIfNotExists() {
     con = mysql.createConnection({
         host: HOST,
         user: USER,
+        port: MYSQL_PORT,
         password: PASSWORD,
         multipleStatements: true
     });
