@@ -1,5 +1,5 @@
 import React from 'react'
-import './PracticeResult.css'
+import './ActualResult.css'
 import { Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css'
@@ -11,7 +11,7 @@ import { AuthContext } from '../../App'
 const initialState = {
   resultList: []
 }
-export default class PracticeResult extends React.Component {
+export default class ActualResult extends React.Component {
   constructor (props) {
     super(props)
     this.state = { ...initialState }
@@ -25,7 +25,7 @@ export default class PracticeResult extends React.Component {
     fetch(
       'http://localhost:8000/api/exam/listOfTestScoresOfUser?userId=' +
         userObj.userId +
-        '&isPractice=true'
+        '&isPractice=false'
     )
       .then(response => {
         if (response.ok) {
@@ -60,7 +60,7 @@ export default class PracticeResult extends React.Component {
     const columns = [
       {
         dataField: 'grade',
-        text: 'Percentage',
+        text: 'Grade',
         sort: true
       },
       {
@@ -90,7 +90,7 @@ export default class PracticeResult extends React.Component {
                 <React.Fragment>
                   <h1 className='display-4'>List of grades</h1>
                   <p className='paragraph1'>
-                    Following are the practice test results
+                    Following are the actual test results
                   </p>
                   <div className='tableResult'>
                     <BootstrapTable

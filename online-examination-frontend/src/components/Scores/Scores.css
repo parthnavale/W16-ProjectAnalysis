@@ -18,3 +18,13 @@
 .divTable {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+th{
+    color:#F56F08;
+    font-weight: bolder;
+    font-size: 20px;
+}
+tr{
+    color: #707070;
+    font-size: 18px;
+}

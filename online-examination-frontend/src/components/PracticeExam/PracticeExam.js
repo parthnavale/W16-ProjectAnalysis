@@ -45,6 +45,7 @@ class PracticeExam extends React.Component {
               });
             }
           }
+          
           this.setState({
             isLoaded: true,
             data: newData,
@@ -85,26 +86,23 @@ class PracticeExam extends React.Component {
         userAnswers &&
         answerIndex !== -1 &&
         userAnswers[answerIndex].selectedAnswer ===
-          this.showHTMLSafeString(item)
+        this.showHTMLSafeString(item)
       ) {
         isChecked = true;
       }
       return (
-        <Row key={index} class="form-check">
+        <Row key={index}>
           <Form.Check
             type="radio"
-            name="radio"
+            name={`radio-${index + 1}`}
             id={index + 1}
-            class="form-check-input"
+            label={this.showHTMLSafeString(item)}
             checked={isChecked}
             value={this.showHTMLSafeString(item)}
             onChange={(e) => {
               this.optionSelected(questionId, e.target.value);
             }}
           />
-          <label class="form-check-label" for={index + 1}>
-            {this.showHTMLSafeString(item)}
-          </label>
         </Row>
       );
     });
@@ -148,7 +146,7 @@ class PracticeExam extends React.Component {
       if (
         answerIndex !== -1 &&
         userAnswer.selectedAnswer ===
-          this.showHTMLSafeString(data[answerIndex].correct_answer)
+        this.showHTMLSafeString(data[answerIndex].correct_answer)
       ) {
         result++;
       }
