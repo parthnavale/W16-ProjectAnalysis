@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import "./Header.css";
 import { LinkContainer } from "react-router-bootstrap";
+import "./Header.css";
 import { AuthContext } from "../../App";
 
 class Header extends React.Component {
@@ -45,6 +45,11 @@ class Header extends React.Component {
               <LinkContainer to="/institution">
                 <Nav.Link>
                   <h4 className="linkText">Institutions</h4>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/aboutus">
+                <Nav.Link>
+                  <h4 className="linkText">About Us</h4>
                 </Nav.Link>
               </LinkContainer>
 
